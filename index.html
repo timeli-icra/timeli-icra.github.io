@@ -1,45 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Paper Title – Project Page</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="Project / Paper description" />
+  <meta name="keywords" content="navigation, dataset, accessibility" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Time-Aware Assistive Navigation</title>
+
+  <!-- Local CSS (replace with your own files if needed) -->
+  <link rel="stylesheet" href="./static/css/bulma.min.css" />
+  <link rel="stylesheet" href="./static/css/index.css" />
+
+  <meta property="og:site_name" content="{{PROJECT_NAME}}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{TITLE}}" />
+
   <style>
-    body {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
-      background: #f9f9f9;
-      color: #333;
-    }
-    h1, h2 {
-      text-align: center;
-    }
-    .authors, .links, .abstract {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .video, .bibtex {
-      text-align: center;
-      margin: 30px 0;
-    }
-    code {
-      background: #eee;
-      padding: 2px 4px;
-    }
-    a {
-      color: #007acc;
-      text-decoration: none;
-    }
+    .video-and-annotations { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+    .annotation-box { padding:12px; border-radius:6px; }
+    .annotation-box.high-level { background:#6e6e6e; color:#fff; }
+    .annotation-box.low-level { background:#e9e9e9; color:#111; }
+    .annotation-title { font-size:1.05rem; font-weight:600; margin-bottom:0.4rem; }
+    .publication-title { margin-bottom:0.5rem; }
+    .publication-links .link-block { margin-right:0.5rem; display:inline-block; margin-bottom:0.4rem; }
+    footer { margin-top:2.5rem; padding:1rem 0; }
   </style>
 </head>
 <body>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">Time-Aware Assistive Navigation</h1>
+        <div class="is-size-5 publication-authors">
+          <span class="author-block">{{Anonymous Submission}}</span>
+          <div class="brmod"></div>
+        </div>
 
-<h1>Time-Aware Assistive Navigation</h1>
-  Can interactive vision-and-language agents learn not just what to say but also when to say it? 
+        <div class="publication-links" style="margin-top:1rem;">
+          <span class="link-block">
+            <a href="./resources/paper.pdf" class="button is-normal is-rounded is-dark">
+              <span>Paper</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="#video_section" class="button is-normal is-rounded is-dark">
+              <span>Video</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="./resources/visualization.zip" class="button is-normal is-rounded is-dark">
+              <span>Visualization</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="./resources/data_archive.zip" class="button is-normal is-rounded is-dark">
+              <span>Data</span>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video + Annotations -->
+<!--   <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+
+          <div class="columns video-and-annotations">
+            <div class="column is-half">
+              <div class="vis-video">
+                <video controls muted loop style="width:100%">
+                  <source src="./resources/video_example_1.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+
+            <div class="column is-half">
+              <h3 class="annotation-title">High-Level Annotation</h3>
+              <div class="annotation-box high-level">
+                <div class="content">
+                  <p>{{HIGH_LEVEL_TEXT_PLACEHOLDER}}</p>
+                </div>
+              </div>
+
+              <h3 class="annotation-title">Low-Level Annotation</h3>
+              <div class="annotation-box low-level">
+                <div class="content">
+                  <p>{{LOW_LEVEL_TEXT_PLACEHOLDER}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Duplicate above block for more videos/annotations -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+ -->
+  <!-- Abstract -->
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>Can interactive vision-and-language agents learn not just what to say but also when to say it? 
 Current language models rarely plan over whether and when to realize a real-time response to a user. However, providing accurate and timely support for human decision-making, such as when guiding visually impaired individuals through urban environments, requires careful real-time responsiveness--poorly timed responses can distract users or add unnecessary cognitive load.
 As a machine intelligence challenge for Multimodal Large Language Model (MLLM)-based agents, we introduce a large-scale multimodal benchmark for an egocentric, assistive navigation task in complex outdoor environments. Using this benchmark, we uncover a fundamental limitation of off-the-shelf MLLMs in delivering safe and time-sensitive navigation instructions, even with model fine-tuning on substantial amounts of data. We then demonstrate that a simple yet effective modification of the model, including direct supervision to predict the underlying reason for each instruction, yields significant performance gains across open-loop, closed-loop, and sim-to-real generalization settings. 
+</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data / Statistics -->
+<!--   <section class="section">
+    <div class="container has-text-centered">
+      <h2 class="title is-4">Data / Statistics</h2>
+      <div class="column">
+        <img src="./resources/data_statistic.png" alt="data statistics" style="max-width:100%;" />
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Video section -->
+<!--   <section id="video_section" class="section">
+    <div class="container has-text-centered">
+      <h2 class="title is-3">Video</h2>
+      <div class="publication-video">
+        <video controls style="max-width:100%;">
+          <source src="./resources/supplementary_video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Acknowledgments -->
+<!--   <section class="section">
+    <div class="container has-text-centered">
+      <h2 class="title is-3">Acknowledgments</h2>
+      <div class="content has-text-justified">
+        <p>{{ACKNOWLEDGMENTS_PLACEHOLDER}}</p>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- BibTeX -->
+<!--   <section class="section">
+    <div class="container has-text-centered">
+      <h2 class="title is-3">BibTeX</h2>
+      <pre><code>
+@inproceedings{placeholder202X,
+  title={{TITLE}},
+  author={{AUTHORS_PLACEHOLDER}},
+  booktitle={{CONFERENCE_PLACEHOLDER}},
+  year={{YEAR_PLACEHOLDER}}
+}
+      </code></pre>
+    </div>
+  </section> -->
+
+  <footer class="footer">
+    <div class="container has-text-centered">
+      <p>Template version — replace all <code>{{...}}</code> placeholders with your content.</p>
+    </div>
+  </footer>
+
+  <!-- Local scripts -->
+  <script src="./static/js/index.js"></script>
 </body>
 </html>
-  
+
