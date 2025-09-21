@@ -225,19 +225,19 @@
       <p>
       Since CARLA’s default pedestrian controller is limited (e.g., it sticks to the center of sidewalks and avoids nearby objects), we modify pedestrian paths to simulate realistic behaviors like veering and navigating close to environmental elements. This mirrors how blind individuals use tactile cues to explore their surroundings.
       </p>
-      <h4 class="title is-5">Sampling Realistic Paths</h4>
+      <strong>Sampling Realistic Paths:</strong>
       <p>
       We increase path diversity by sampling waypoints near buildings and curbs and adding noise to simulate veering. Walkable regions are extracted using semantic maps, and route planning is handled with A* search. These paths generate video data at 1 frame per second, along with metadata such as obstacle type, location, sensor readings, and weather.
       </p>
       
-      <h4 class="title is-5">Instruction Generation</h4>
+      <strong>Instruction Generation</strong>
       <p>
       Instructions are generated using a Compound Action Specification (CAS) based on user orientation, route progress, and environment context. Each instruction includes:
       </p>
       <ul>
-        <li><strong>Action:</strong> walk, turn</li>
-        <li><strong>Direction:</strong> forward, left, right</li>
-        <li><strong>Angle:</strong> slightly, or clock-face references</li>
+        <li>Action: walk, turn</li>
+        <li>Direction: forward, left, right</li>
+        <li>Angle: slightly, or clock-face references</li>
       </ul>
       
       <p>
@@ -247,35 +247,27 @@
       <p>
       Objects within 1.5m (cane range) trigger instructions like:
       </p>
-      
-      <div class="box">
-        <pre><code>
-      Continue forward. Be careful, pole in front.
-      Turn slightly left. Vehicle on your right.
-        </code></pre>
-      </div>
+
+      ''Continue forward. Be careful, pole in front.
+      Turn slightly left. Vehicle on your right.''
       
       <p>
       A bird’s-eye view (from segmentation and depth maps) helps calculate distances. We also predict pedestrian movement using a bicycle model to time cues in advance.
       </p>
       
-      <h4 class="title is-5">Event-Driven Navigation Prompts</h4>
+      <strong>Event-Driven Navigation Prompts</strong>
       <p>
       While on sidewalks, instructions are triggered when a turn is required or an obstacle is detected within 1.5m. For example:
       </p>
-      <div class="box">
-        <pre><code>
-      Walk along the wall on your right.
-        </code></pre>
-      </div>
-      
+      ''Walk along the wall on your right.''
+
       <p>
       At junctions, minimal instruction is used to avoid distraction. Example prompts include:
       </p>
       <ul>
-        <li>“Approaching junction in five meters.”</li>
-        <li>“You are entering/crossing a junction.”</li>
-        <li>“You have exited the junction.”</li>
+        <li>''Approaching junction in five meters.''</li>
+        <li>''You are entering/crossing a junction.''</li>
+        <li>''You have exited the junction.''</li>
       </ul>
       
       <p>
