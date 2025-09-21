@@ -225,13 +225,13 @@
       
       <strong>Sampling Realistic Paths: </strong>
       We increase path diversity by sampling waypoints near buildings and curbs and adding noise to simulate veering. Walkable regions are extracted using semantic maps, and route planning is handled with A* search. These paths generate video data at 1 frame per second, along with metadata such as obstacle type, location, sensor readings, and weather.
-      
+      <br>
       <strong>Instruction Generation: </strong>
       Instructions are generated using a Compound Action Specification (CAS) based on user orientation, route progress, and environment context. Each instruction includes: Action, Direction, and Angle.
       We add context with nearby object or landmark descriptions (e.g., “building on the right”) using nine object types: building, fence, pedestrian, pole, vegetation, vehicle, wall, traffic sign. Relative directions are: in front, left, right.
       Objects within 1.5m (cane range) trigger instructions like: ''Continue forward. Be careful, pole in front. Turn slightly left. Vehicle on your right.''
       A bird’s-eye view (from segmentation and depth maps) helps calculate distances. We also predict pedestrian movement using a bicycle model to time cues in advance.
-      
+      <br>
       <strong>Event-Driven Navigation Prompts: </strong>
       While on sidewalks, instructions are triggered when a turn is required or an obstacle is detected within 1.5m. For example: ''Walk along the wall on your right.''
       At junctions, minimal instruction is used to avoid distraction. Example prompts include: ''Approaching junction in five meters.'', ''You are entering/crossing a junction.'', ''You have exited the junction.''
