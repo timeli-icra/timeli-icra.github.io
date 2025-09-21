@@ -173,8 +173,8 @@
             <li><a href="#sec3-2">3.2 Model Components Ablation</a></li>
             <li><a href="#sec3-3">3.3 Safety-Critical Timing Analysis</a></li>
             <li><a href="#sec3-4">3.4 Inference Time</a></li>
-            <li><a href="#sec3-5">3.5 Model Generalization to BDD</a></li>
-            <li><a href="#sec3-6">3.6 Preliminary Smartphone-based Evaluation</a></li>
+<!--             <li><a href="#sec3-5">3.5 Model Generalization to BDD</a></li> -->
+            <li><a href="#sec3-6">3.5 Preliminary Smartphone-based Evaluation</a></li>
           </ul>
         </li>
         <li><a href="#sec4">4 Additional Qualitative Results</a></li>
@@ -284,7 +284,9 @@
 
       <h2 id="sec2" class="title is-2">2 Experimental Settings</h2>
       <h3 id="sec2-1" class="title is-4">2.1 Prompt and Input Settings</h3>
-      <h4 class="title is-5">Prompt Example</h4>
+
+      
+      <h4 class="title is-5">In-Context Learning Prompt for Off-The-Shelf Models:</h4>
       <div class="box">
         <pre><code>
           You are guiding a blind person. The blind person needs to approach the goal
@@ -310,36 +312,149 @@
           Input: goal: [x,y]=[0,-1], Output: Turn around. There’s a fence on your left.
         </code></pre>
       </div>
+
+      <h4 class="title is-5">Basic Prompt for Fine-tuning:</h4>
+      <div class="box">
+        <pre><code>
+          You are guiding a blind person. The blind person needs to approach the goal
+          [x,y]={goal coordinate} located in relative longitudinal and latitudinal offsets in
+          meters. Generate an instruction for the current frame. You will need to provide
+          step-by- step verbal navigation instructions to help them reach the destination
+          safely and efficiently. Instruct instruct the user to stay on the path to the goal,
+          only notify what is needed, including immediate turns they need to make and
+          obstacles to avoid within 1.5m (cane distance). Keep the instructions in junctions
+          minimal for safety to avoid distraction as the user relies on hearing to navigate
+          and listen to traffic. You should generally not instruct the user for consecutive
+          frames unless absolutely needed, and avoid too frequent instructions. Only
+          return the instruction to convey. Return “None” for remaining silent.
+        </code></pre>
+      </div>
+
+      <h4 class="title is-5">Prompt with History, Plan, and Reason Prediction for Finetuning:</h4>
+      <div class="box">
+        <pre><code>
+          You are guiding a blind person. The blind person needs to approach the goal
+          [x,y]={goal coordinate} located in relative longitudinal and latitudinal offsets
+          in meters. The high-level plan: {plan}, needs to be followed safely. You have
+          conveyed the following instructions in the past: {history information}. Generate
+          an instruction for the current frame. You will need to provide step-by- step
+          verbal navigation instructions to help them reach the destination safely and
+          efficiently. Instruct instruct the user to stay on the path to the goal, only notify
+          what is needed, including immediate turns they need to make and obstacles to
+          avoid within 1.5m (cane distance). Keep the instructions in junctions minimal
+          for safety to avoid distraction as the user relies on hearing to navigate and listen
+          to traffic. You should generally not instruct the user for consecutive frames
+          unless absolutely needed, and avoid too frequent instructions. Only return the
+          instruction to convey. Return “None” for remaining silent.
+          Answer in JSON format. There should be a key “reason” and a key “instruction”
+          in the JSON.
+          { “reason”: “One of the following: ‘remain_silent’, ‘remain_silent_in_junction’,
+          ‘enter_junction’, ‘exit_junction’, ‘obstacle_in_front’, ‘constant_instruction’, ‘direction_change’, ’stop”’, “instruction”: “The spoken instruction provided to
+          the blind navigator corresponding to the specified reason”}
+        </code></pre>
+      </div>
   
-      <p>...</p>
 
       <h3 id="sec2-2" class="title is-4">2.2 Metric Definitions</h3>
-      <p>...</p>
+      <p>SCT, assistance score (AS)</p>
 
       <h3 id="sec2-3" class="title is-4">2.3 Realistic Closed-Loop Evaluation with Noisy Conditions</h3>
-      <p>...</p>
+      <p>
+        We evaluate model performance in a closed-loop manner by conducting interactive experiments and evaluations in a blind simulation environment.
+        In this simulation, an ego-centered walker executes instructions predicted by the model and follows the goal. To simulate realistic sensor measurements and account for real-world uncertainty, 
+        we further add Gaussian noise to both the goal coordinates (Gaussian noise with mean = 0°, SD = 2.0m) and the pedestrian’s orientation (Gaussian noise with mean = 0°, SD = 5°).
+      </p>
+
 
       <h2 id="sec3" class="title is-2">3 Additional Experimental Analysis</h2>
-      <h3 id="sec3-1" class="title is-4">3.1 Results Summary and Error Intervals</h3>
+      <h3 id="sec3-1" class="title is-4">3.1 Results Summary</h3>
+      <p>
+        Fig. 3 summarizes the performance of fine-tuned models on
+        TIMELI, evaluated in the open-loop simulation setting. The plot highlights the challenges of the
+        interactive decision-making task: current models often exhibit inappropriate timing, frequently
+        confuse instruction directions (e.g., “left” vs. “right”), and generate overly verbose responses.
+      </p>
+        <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp4_piechart.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+            <strong>Figure 3: Radar Plot for Fine-tuned Models in Simulation.</strong> We leverage the proposed video-based
+            assistive navigation task to evaluate multiple dimensions of instruction generation models. 
+            By finetuning models on our TIMELI benchmark, we observe that existing models frequently make errors in
+            our navigation task, including timing of instructions (Timing), clarity and brevity of communication
+            (Conciseness), identification of the reason (Instruction Reason), appropriate silence in intersections
+            (Silence in Junction), accuracy in detecting relevant obstacles (Object Precision), and correctness of
+            direction (Instruction Direction).
+          </figcaption>
+        </figure>
       <p>...</p>
 
       <h3 id="sec3-2" class="title is-4">3.2 Model Components Ablation</h3>
-      <p>...</p>
+      <p>
+        To evaluate the contribution of various components in our model—such as input instruction history, high-level navigation plans, 
+        and reason prediction—we progressively add each element and assess performance in both open-loop and closed-loop settings. 
+        The results show that each added component consistently improves the model’s performance across both evaluation modes. 
+        In particular, adding direct supervision for reason prediction leads to a significant boost, helping the model better interpret and communicate the rationale behind navigation instructions.
+      </p>
 
       <h3 id="sec3-3" class="title is-4">3.3 Safety-Critical Timing Analysis</h3>
       <p>...</p>
 
       <h3 id="sec3-4" class="title is-4">3.4 Inference Time</h3>
-      <p>...</p>
+      <p>
+        We evaluate the trade-off between inference time and model performance with and without the early exit mechanism. 
+        The large LLaVA-v1.6 model has a runtime of 1.22 seconds per frame, while the tiny model runs at 0.77 seconds per frame. 
+        With early exit enabled, we observe a significant reduction in inference time with minimal impact on performance—for example, 
+        the large model’s runtime decreases to 0.99 seconds per frame, achieving an 18.85% speedup, 
+        while key metrics such as route completion score in closed-loop evaluation remain unaffected.
+      </p>
 
-      <h3 id="sec3-5" class="title is-4">3.5 Model Generalization to BDD</h3>
-      <p>...</p>
+<!--       <h3 id="sec3-5" class="title is-4">3.5 Model Generalization to BDD</h3>
+      <p>...</p> -->
 
       <h3 id="sec3-6" class="title is-4">3.6 Preliminary Smartphone-based Evaluation</h3>
-      <p>...</p>
+      <p>
+        Although the task remains challenging, we conducted a preliminary supervised user study with ten blind participants using a smartphone-based application to evaluate system performance and gather feedback. 
+        Figure 4 shows the system interface used during real-world closed-loop experiments. The system was developed on an iOS device and utilizes the Google Maps API for route planning to predefined destinations. 
+        Based on GPS coordinates from the API, it computes local goal positions and corresponding commands. A front-view camera captures images at 60 frames per second, which, along with the calculated data, 
+        is passed to a lightweight MLLM that generates navigation instructions. If an instruction other than “None” (indicating silence) is produced, it is read aloud using a text-to-speech engine.
+        We designed three real-world navigation routes using Google Maps: two 50-meter routes with a single turn, and one 100-meter route with two turns and an intersection. 
+        As shown in Table 10, the overall success rate was 40%, with most failures due to collisions with static obstacles. Interestingly, dynamic obstacles such as pedestrians and vehicles often adjusted their paths, 
+        reducing collision risk, whereas static obstacles presented a greater hazard. Although the current system is not yet suitable for unsupervised daily use, 
+        these initial results highlight the potential of our MLLM-based navigation framework to assist individuals with visual impairments and guide future development.
+      </p>
+      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp5_smartphone.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+            <strong>Figure 4: iPhone App Interface</strong> We validate our model in closed-loop, real-world settings using an
+            iPhone app instantiation. The app displays the front-view image on the left and the planned path to
+            the destination (via Google Maps) on the right. Instructions are shown at the top and also delivered
+            through audio.
+          </figcaption>
+        </figure>
 
       <h2 id="sec4" class="title is-2">4 Additional Qualitative Results</h2>
-      <p>...</p>
+      <p>
+        The results of our closed-loop experiments are shown in Figure 5. While failures do occur—such as users veering off the intended path—the models often succeed in guiding users back on track. 
+        This recovery ability is likely attributed to the diversity in the training data, which includes variations in perspective and pedestrian path scenarios.
+      </p>
+
+      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp6_closedloop_vis.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+            <strong>Figure 6: Closed-loop Visualization.</strong> We present success and failure cases from the closed-loop
+            navigation evaluation. The blue line shows the intended route, and the orange line shows the path a
+            follower walks based on the instructions of a TIMELI-trained model. For failure cases, the model
+            demonstrates an ability to recover from deviations by issuing corrective instructions. However, the
+            recovery process often incurs additional time, which can lead to failure to reach the destination within
+            the allotted time budget.
+          </figcaption>
+        </figure>
 
 
       
@@ -354,49 +469,6 @@
             mobility guides interviews.
           </figcaption>
         </figure> -->
-
-      
-
-      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
-          <img src="./resources/supp4_piechart.png" 
-               style="width:100%; height:auto; display:block; margin:0 auto;" 
-               alt="Pedestrian Paths"> 
-          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
-            <strong>Figure 4: Radar Plot for Fine-tuned Models in Simulation.</strong> We leverage the proposed video-based
-            assistive navigation task to evaluate multiple dimensions of instruction generation models. 
-            By finetuning models on our TIMELI benchmark, we observe that existing models frequently make errors in
-            our navigation task, including timing of instructions (Timing), clarity and brevity of communication
-            (Conciseness), identification of the reason (Instruction Reason), appropriate silence in intersections
-            (Silence in Junction), accuracy in detecting relevant obstacles (Object Precision), and correctness of
-            direction (Instruction Direction).
-          </figcaption>
-        </figure>
-
-       <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
-          <img src="./resources/supp5_smartphone.png" 
-               style="width:100%; height:auto; display:block; margin:0 auto;" 
-               alt="Pedestrian Paths"> 
-          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
-            <strong>Figure 5: iPhone App Interface</strong> We validate our model in closed-loop, real-world settings using an
-            iPhone app instantiation. The app displays the front-view image on the left and the planned path to
-            the destination (via Google Maps) on the right. Instructions are shown at the top and also delivered
-            through audio.
-          </figcaption>
-        </figure>
-
-       <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
-          <img src="./resources/supp6_closedloop_vis.png" 
-               style="width:100%; height:auto; display:block; margin:0 auto;" 
-               alt="Pedestrian Paths"> 
-          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
-            <strong>Figure 6: Closed-loop Visualization.</strong> We present success and failure cases from the closed-loop
-            navigation evaluation. The blue line shows the intended route, and the orange line shows the path a
-            follower walks based on the instructions of a TIMELI-trained model. For failure cases, the model
-            demonstrates an ability to recover from deviations by issuing corrective instructions. However, the
-            recovery process often incurs additional time, which can lead to failure to reach the destination within
-            the allotted time budget.
-          </figcaption>
-        </figure>
 
     </div>
   </section>
