@@ -287,7 +287,7 @@
 
       
       <h4 class="title is-5">In-Context Learning Prompt for Off-The-Shelf Models:</h4>
-      <div class="box">
+      <div class="box" style="width: 80%; margin: 0 auto;">
         <pre><code>
           You are guiding a blind person. The blind person needs to approach the goal
           [x,y]={goal coordinate} located in relative longitudinal and latitudinal offsets
@@ -314,7 +314,7 @@
       </div>
 
       <h4 class="title is-5">Basic Prompt for Fine-tuning:</h4>
-      <div class="box">
+      <div class="box" style="width: 80%; margin: 0 auto;">
         <pre><code>
           You are guiding a blind person. The blind person needs to approach the goal
           [x,y]={goal coordinate} located in relative longitudinal and latitudinal offsets in
@@ -331,7 +331,7 @@
       </div>
 
       <h4 class="title is-5">Prompt with History, Plan, and Reason Prediction for Finetuning:</h4>
-      <div class="box">
+      <div class="box" style="width: 80%; margin: 0 auto;">
         <pre><code>
           You are guiding a blind person. The blind person needs to approach the goal
           [x,y]={goal coordinate} located in relative longitudinal and latitudinal offsets
@@ -349,7 +349,8 @@
           Answer in JSON format. There should be a key “reason” and a key “instruction”
           in the JSON.
           { “reason”: “One of the following: ‘remain_silent’, ‘remain_silent_in_junction’,
-          ‘enter_junction’, ‘exit_junction’, ‘obstacle_in_front’, ‘constant_instruction’, ‘direction_change’, ’stop”’, “instruction”: “The spoken instruction provided to
+          ‘enter_junction’, ‘exit_junction’, ‘obstacle_in_front’, ‘constant_instruction’, 
+          ‘direction_change’, ’stop”’, “instruction”: “The spoken instruction provided to
           the blind navigator corresponding to the specified reason”}
         </code></pre>
       </div>
@@ -498,11 +499,11 @@
     </div>
   </section> -->
 
-  <footer class="footer">
+<!--   <footer class="footer">
     <div class="container has-text-centered">
       <p>Template version — replace all <code>{{...}}</code> placeholders with your content.</p>
     </div>
-  </footer>
+  </footer> -->
 
   <!-- Local scripts -->
   <script src="./static/js/index.js"></script>
