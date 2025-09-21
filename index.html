@@ -188,13 +188,33 @@
       <h2 id="sec1" class="title is-2">1 TIMELI Benchmark Details</h2>
       <h3 id="sec1-1" class="title is-4">1.1 Informed Instruction Design</h3>
       <p>
+        TIMELI comprises a large-scale, synthetically generated (i.e., rule-based) instructional simulation and benchmark, along with a real-world, human-annotated benchmark. Both benchmarks undergo an iterative design and quality validation process.
         Our instruction design is based on real-world orientation and mobility (O&M) principles used to guide visually impaired individuals. Navigation through unfamiliar, complex environments remains a cognitively demanding and risky task, especially around intersections and moving obstacles.
       </p>
       <p>
-        We conducted a focus group with O&M specialists, who shared strategies such as using clock-based directions, offering frequent confirmations near intersections, and staying silent during street crossings. They emphasized keeping instructions concise and limited to the most relevant details within the user’s cane range.
+        <strong>Iterative Design with Orientation and Mobility Guides:</strong>
+        We initially performed a focus group with three local orientation and mobility guides regarding real-world scenarios and guidance design. 
+        The Zoom session lasted two hours, and guides were paid for their time ($50 an hour). During the session, guides reported various support strategies, such as providing clock orientation, frequent affirmation at safety-critical tasks when just entering or exiting an intersection (i.e., junctions), 
+        and maintaining silence around them. For transparency, we will release the transcripts from the sessions alongside the benchmark.
+        Subsequently, we asked guides to remotely support blind participants in an in-situ, real-world study. 
+        A recurrent theme involved only alerting users of the most salient environmental characteristics, defined at the span of the white cane. 
+        While we focus on white cane users (the most frequent mobility aid used today), guides also mentioned that guide dog users could benefit from contextual information about the subset of off-ground objects in their path. 
+        However, users generally offloaded object avoidance tasks to their guide dogs.
+        While MLLMs seem to fail at basic instructional logic, we also emphasize that correct instruction requires a fine-grained and precise 3D understanding of scene context, 
+        and the instruction set can be high-dimensional at times beyond basic classification of turn direction and objects, i.e., due to rich environmental descriptions that help navigators. 
+        Moreover, we also observed indications for differing preferences and personalization, an aspect which we plan to study in the future.
       </p>
       <p>
-        Using these insights, we designed simulated navigation scenarios in CARLA. We applied rules for when and how to give instructions—prioritizing short prompts at the right moments and orientation feedback when users veer off path. A rule-based system was then used to generate and refine 1,000 navigation clips with expert feedback. This process enables consistent, high-quality instruction generation across simulated environments.
+        <strong>Synthetic Scenarios:</strong>
+        Given the preliminary data, we designed simulated navigation scenarios in CARLA. 
+        The simulated scenarios and corresponding instructions were shown to guides, and we discussed how each guide would change the scenario to increase realism and the instructions to adhere to orientation and mobility principles. 
+        For instance, guides often would reflect on their own experience and mention how users can be hesitant in unfamiliar routes, taking smaller steps. Guides also mentioned how frequent but short instructions can help users stay on the path without getting overly distracted (e.g., “okay”, “a bit more”). 
+        Moreover, while previous literature reports sighted guides should not instruct in junctions, guides reported several exceptions where short instructions are still needed to maintain orientation. We design these into our simulation as well.
+        We find that off-the-shelf models struggle with our task, speaking repeatedly and at the wrong time while confusing directionality, distance, and relevant context. We now describe our automatic instruction generation procedure. 
+        One guide described the difficulty in aligning to cross in certain junctions (e.g., in areas that lack clear pavements and curbs), while reiterating a common occurrence of significant veering during the crossing. 
+        Thus, our instructions also incorporate short orientation feedback throughout the crossing in the case of slight deviation (above 30 degrees) from the planned path. 
+        As a rule of thumb, we emphasize concise instruction at the correct time, defined either based on distance from landmarks or at fixed intervals.
+        We leverage the rule-based generation to sample a random set of 1,000 clips, which are subsequently shown again to the sighted guides for quality validation and final refinements. Finally, the complete benchmark is generated.
       </p>
 
         <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
