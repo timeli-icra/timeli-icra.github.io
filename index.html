@@ -192,7 +192,7 @@
                style="width:100%; height:auto; display:block; margin:0 auto;" 
                alt="Pedestrian Paths"> 
           <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
-            <strong>Figure 1.</strong> Extracting Layout Details for Modified Pedestrian Paths. We extract walkable and
+            <strong>Figure 1: Extracting Layout Details for Modified Pedestrian Paths.</strong>  We extract walkable and
             sidewalk space in the map, and employ it to sample waypoints nearby buildings and curbs. In
             the figure, red denotes sidewalk space and white and green denotes road or obstructed space. The
             sampled waypoints are then provided as intermediate goals to guide path planning for spawned
@@ -200,39 +200,66 @@
           </figcaption>
         </figure>
 
-      <figure class="image has-text-centered" style="width:75%; height:auto; max-width:none;">
-        <img src="./resources/supp2_statistics.png" alt="Pedestrian Paths">
-        <figcaption class="has-text-centered" style="margin-top:0.5rem; font-size:1.9rem; color:#555;">
-          <strong>Figure 2. Extracting Layout Details for Modified Pedestrian Paths.</strong> .
-        </figcaption>
+      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp2_statistics.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+            <strong>Figure 2: Benchmark Statistics</strong> Left: distribution of events, categorized by whether the user is at
+            an intersection. Right: keywords from instructional tasks, derived through in-situ study and trained
+            mobility guides interviews.
+          </figcaption>
         </figure>
 
-      <figure class="image has-text-centered" style="width:75%; height:auto; max-width:none;">
-        <img src="./resources/supp3_annotation_interface.png" alt="Pedestrian Paths">
-        <figcaption class="has-text-centered" style="margin-top:0.5rem; font-size:1.9rem; color:#555;">
-          <strong>Figure 3. Extracting Layout Details for Modified Pedestrian Paths.</strong> .
-        </figcaption>
+      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp3_annotation_interface.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+            <strong>Figure 3: Annotation Interface for YouTube Videos</strong> We collect a diverse set of U.S.-based YouTube 
+            videos and manually annotate them through the interface in a multi-round validation process.
+          </figcaption>
         </figure>
 
-      <figure class="image has-text-centered" style="width:75%; height:auto; max-width:none;">
-        <img src="./resources/supp4_piechart.png" alt="Pedestrian Paths">
-        <figcaption class="has-text-centered" style="margin-top:0.5rem; font-size:1.9rem; color:#555;">
-          <strong>Figure 4. Extracting Layout Details for Modified Pedestrian Paths.</strong> .
-        </figcaption>
+      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp4_piechart.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+            <strong>Figure 4: Radar Plot for Fine-tuned Models in Simulation.</strong> We leverage the proposed video-based
+            assistive navigation task to evaluate multiple dimensions of instruction generation models. 
+            By finetuning models on our TIMELI benchmark, we observe that existing models frequently make errors in
+            our navigation task, including timing of instructions (Timing), clarity and brevity of communication
+            (Conciseness), identification of the reason (Instruction Reason), appropriate silence in intersections
+            (Silence in Junction), accuracy in detecting relevant obstacles (Object Precision), and correctness of
+            direction (Instruction Direction).
+          </figcaption>
         </figure>
 
-       <figure class="image has-text-centered" style="width:75%; height:auto; max-width:none;">
-        <img src="./resources/supp5_smartphone.png" alt="Pedestrian Paths">
-        <figcaption class="has-text-centered" style="margin-top:0.5rem; font-size:1.9rem; color:#555;">
-          <strong>Figure 5. Extracting Layout Details for Modified Pedestrian Paths.</strong> .
-        </figcaption>
+       <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp5_smartphone.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+            <strong>Figure 5: iPhone App Interface</strong> We validate our model in closed-loop, real-world settings using an
+            iPhone app instantiation. The app displays the front-view image on the left and the planned path to
+            the destination (via Google Maps) on the right. Instructions are shown at the top and also delivered
+            through audio.
+          </figcaption>
         </figure>
 
-       <figure class="image has-text-centered" style="width:75%; height:auto; max-width:none;">
-        <img src="./resources/supp6_closedloop_vis.png" alt="Pedestrian Paths">
-        <figcaption class="has-text-centered" style="margin-top:0.5rem; font-size:1.9rem; color:#555;">
-          <strong>Figure 6. Extracting Layout Details for Modified Pedestrian Paths.</strong> .
-        </figcaption>
+       <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp6_closedloop_vis.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+            <strong>Figure 6: Closed-loop Visualization.</strong> We present success and failure cases from the closed-loop
+            navigation evaluation. The blue line shows the intended route, and the orange line shows the path a
+            follower walks based on the instructions of a TIMELI-trained model. For failure cases, the model
+            demonstrates an ability to recover from deviations by issuing corrective instructions. However, the
+            recovery process often incurs additional time, which can lead to failure to reach the destination within
+            the allotted time budget.
+          </figcaption>
         </figure>
 
       
