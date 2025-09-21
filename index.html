@@ -217,18 +217,68 @@
         We leverage the rule-based generation to sample a random set of 1,000 clips, which are subsequently shown again to the sighted guides for quality validation and final refinements. Finally, the complete benchmark is generated.
       </p>
 
-        <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
-          <img src="./resources/supp1.png" 
-               style="width:100%; height:auto; display:block; margin:0 auto;" 
-               alt="Pedestrian Paths"> 
-          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
-            <strong>Figure 1: Extracting Layout Details for Modified Pedestrian Paths.</strong>  We extract walkable and
-            sidewalk space in the map, and employ it to sample waypoints nearby buildings and curbs. In
-            the figure, red denotes sidewalk space and white and green denotes road or obstructed space. The
-            sampled waypoints are then provided as intermediate goals to guide path planning for spawned
-            pedestrians during data collection. This ensures a realistic and challenging benchmark.
-          </figcaption>
-        </figure>
+      <h3 id="sec1-2" class="title is-4">1.2 Adapting CARLA to Realistic Assistive Navigation Scenarios</h3>
+      
+      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/supp1.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+          <strong>Figure 1: Extracting Layout Details for Modified Pedestrian Paths.</strong>  We extract walkable and
+          sidewalk space in the map, and employ it to sample waypoints nearby buildings and curbs. In
+          the figure, red denotes sidewalk space and white and green denotes road or obstructed space. The
+          sampled waypoints are then provided as intermediate goals to guide path planning for spawned
+          pedestrians during data collection. This ensures a realistic and challenging benchmark.
+        </figcaption>
+      </figure>
+      <p>...</p>
+
+      <h3 id="sec1-3" class="title is-4">1.3 Real-World Video Annotation Process</h3>
+      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/supp3_annotation_interface.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+          <strong>Figure 3: Annotation Interface for YouTube Videos</strong> We collect a diverse set of U.S.-based YouTube 
+          videos and manually annotate them through the interface in a multi-round validation process.
+        </figcaption>
+      </figure>
+      <p>...</p>
+
+      <h2 id="sec2" class="title is-2">2 Experimental Settings</h2>
+      <h3 id="sec2-1" class="title is-4">2.1 Prompt and Input Settings</h3>
+      <p>...</p>
+
+      <h3 id="sec2-2" class="title is-4">2.2 Metric Definitions</h3>
+      <p>...</p>
+
+      <h3 id="sec2-3" class="title is-4">2.3 Realistic Closed-Loop Evaluation with Noisy Conditions</h3>
+      <p>...</p>
+
+      <h2 id="sec3" class="title is-2">3 Additional Experimental Analysis</h2>
+      <h3 id="sec3-1" class="title is-4">3.1 Results Summary and Error Intervals</h3>
+      <p>...</p>
+
+      <h3 id="sec3-2" class="title is-4">3.2 Model Components Ablation</h3>
+      <p>...</p>
+
+      <h3 id="sec3-3" class="title is-4">3.3 Safety-Critical Timing Analysis</h3>
+      <p>...</p>
+
+      <h3 id="sec3-4" class="title is-4">3.4 Inference Time</h3>
+      <p>...</p>
+
+      <h3 id="sec3-5" class="title is-4">3.5 Model Generalization to BDD</h3>
+      <p>...</p>
+
+      <h3 id="sec3-6" class="title is-4">3.6 Preliminary Smartphone-based Evaluation</h3>
+      <p>...</p>
+
+      <h2 id="sec4" class="title is-2">4 Additional Qualitative Results</h2>
+      <p>...</p>
+
+
+      
 
       <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
           <img src="./resources/supp2_statistics.png" 
@@ -241,15 +291,7 @@
           </figcaption>
         </figure>
 
-      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
-          <img src="./resources/supp3_annotation_interface.png" 
-               style="width:100%; height:auto; display:block; margin:0 auto;" 
-               alt="Pedestrian Paths"> 
-          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
-            <strong>Figure 3: Annotation Interface for YouTube Videos</strong> We collect a diverse set of U.S.-based YouTube 
-            videos and manually annotate them through the interface in a multi-round validation process.
-          </figcaption>
-        </figure>
+      
 
       <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
           <img src="./resources/supp4_piechart.png" 
@@ -292,46 +334,6 @@
           </figcaption>
         </figure>
 
-      
-        <p>...</p>
-
-      <h3 id="sec1-2" class="title is-4">1.2 Adapting CARLA...</h3>
-      <p>...</p>
-
-      <h3 id="sec1-3" class="title is-4">1.3 Real-World Video Annotation Process</h3>
-      <p>...</p>
-
-      <h2 id="sec2" class="title is-2">2 Experimental Settings</h2>
-      <h3 id="sec2-1" class="title is-4">2.1 Prompt and Input Settings</h3>
-      <p>...</p>
-
-      <h3 id="sec2-2" class="title is-4">2.2 Metric Definitions</h3>
-      <p>...</p>
-
-      <h3 id="sec2-3" class="title is-4">2.3 Realistic Closed-Loop Evaluation with Noisy Conditions</h3>
-      <p>...</p>
-
-      <h2 id="sec3" class="title is-2">3 Additional Experimental Analysis</h2>
-      <h3 id="sec3-1" class="title is-4">3.1 Results Summary and Error Intervals</h3>
-      <p>...</p>
-
-      <h3 id="sec3-2" class="title is-4">3.2 Model Components Ablation</h3>
-      <p>...</p>
-
-      <h3 id="sec3-3" class="title is-4">3.3 Safety-Critical Timing Analysis</h3>
-      <p>...</p>
-
-      <h3 id="sec3-4" class="title is-4">3.4 Inference Time</h3>
-      <p>...</p>
-
-      <h3 id="sec3-5" class="title is-4">3.5 Model Generalization to BDD</h3>
-      <p>...</p>
-
-      <h3 id="sec3-6" class="title is-4">3.6 Preliminary Smartphone-based Evaluation</h3>
-      <p>...</p>
-
-      <h2 id="sec4" class="title is-2">4 Additional Qualitative Results</h2>
-      <p>...</p>
     </div>
   </section>
 
