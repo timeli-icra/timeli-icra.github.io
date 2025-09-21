@@ -247,6 +247,32 @@
 
       <h2 id="sec2" class="title is-2">2 Experimental Settings</h2>
       <h3 id="sec2-1" class="title is-4">2.1 Prompt and Input Settings</h3>
+      <h4 class="title is-5">Prompt Example</h4>
+      <div class="box">
+        <pre><code>
+          You are guiding a blind person. The blind person needs to approach the goal
+          [x,y]={goal coordinate} located in relative longitudinal and latitudinal offsets
+          in meters.
+          Generate an instruction for the current frame. You will need to provide step-by-
+          step verbal navigation instructions to help them reach the destination safely and
+          efficiently. Instruct the user to stay on the path to the goal, only notify what is
+          needed, including immediate turns they need to make and obstacles to avoid
+          within 1.5m (cane distance). Keep the instructions in junctions minimal for
+          safety to avoid distraction as the user relies on hearing to navigate and listen
+          to traffic. You should generally not instruct the user for consecutive frames
+          unless absolutely needed, and avoid too frequent instructions. Only return the
+          instruction to convey. Return “None” for remaining silent.
+          
+          Examples:
+          Input: goal: [x,y]=[0,1], Output: Keep walking straight.
+          Input: goal: [x,y]=[0,1], Output: None.
+          Input: goal: [x,y]=[1,0], Output: Turn right and keep crossing.
+          Input: goal: [x,y]=[0.5,0], Output: Turn slightly right and keep walking. There’s a pole on your left.
+          Input: goal: [x,y]=[-1,0], Output: Turn to your nine and keep walking. There’s a pole on your right and vehicle on your left.
+          Input: goal: [x,y]=[-0.5,0], Output: Turn slightly left and continue walking. There’s a vehicle on your left.
+          Input: goal: [x,y]=[0,-1], Output: Turn around. There’s a fence on your left.
+        </code></pre>
+  
       <p>...</p>
 
       <h3 id="sec2-2" class="title is-4">2.2 Metric Definitions</h3>
