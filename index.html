@@ -187,6 +187,25 @@
     <div class="container">
       <h2 id="sec1" class="title is-2">1 TIMELI Benchmark Details</h2>
       <h3 id="sec1-1" class="title is-4">1.1 Informed Instruction Design</h3>
+      <p>
+        Our model’s action space—i.e., the instructions it gives—is guided by principles from orientation and mobility (O&M) training and prior research on how visually impaired individuals navigate their environments. Despite a large body of literature, navigation in unfamiliar, complex environments—with frequent instructions—remains cognitively demanding and can be dangerous.
+      </p>
+      <p>
+        For example, past studies (e.g., Williams et al. [19], Lee et al. [10, 11]) have highlighted serious challenges when navigating near intersections, vehicles, or dynamic surroundings. A common recommendation is to minimize verbal instructions during safety-critical moments, like crossing streets. In our work, we explore how such knowledge can be embedded into vision-and-language navigation (VLN) models, through prompt engineering and model fine-tuning, since off-the-shelf models perform poorly in this context.
+      </p>
+      <p>
+        We conducted a two-hour focus group with three local O&M guides to learn about real-world navigation strategies. They were compensated for their time ($50/hour). During the session, guides described support strategies like using clock-based orientation, giving frequent confirmations at intersections, and remaining silent during critical moments like street crossings.
+      </p>
+      <p>
+        Guides emphasized only mentioning salient environmental features within white cane range, to avoid overloading the user. Although our study focuses on white cane users, guides noted that guide dog users may benefit from additional information about off-ground obstacles. Current large VLN models often fail to follow basic instruction logic. Effective navigation support requires a detailed 3D understanding of the scene and may require user-specific personalization, which we plan to explore in future work.
+      </p>
+      <p>
+        Based on the focus group findings, we designed navigation scenarios in the CARLA simulator. We shared the simulated instructions with the guides and collected feedback on how to improve both scene realism and instruction quality. Insights included the need for frequent but short prompts, allowances for brief guidance even at intersections, and corrective feedback during veering in street crossings.
+      </p>
+      <p>
+        We implemented a rule-based instruction generation system and sampled 1,000 clips from CARLA. These were reviewed and refined by O&M guides. Once set up, our system can automatically generate ground-truth navigation instructions at any simulation frame, forming the basis for our benchmark.
+      </p>
+
         <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
           <img src="./resources/supp1.png" 
                style="width:100%; height:auto; display:block; margin:0 auto;" 
