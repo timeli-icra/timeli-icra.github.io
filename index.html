@@ -229,32 +229,46 @@
 
       <h3 id="sec1-2" class="title is-4">1.2 Adapting CARLA to Realistic Assistive Navigation Scenarios</h3>
       <p>
-      We adapt the CARLA simulator to support rule-based instruction generation for assistive navigation. The simulation is informed by real-world studies and feedback from orientation and mobility experts. Pedestrians are spawned with egocentric sensors and randomized goals across different town and weather conditions.
-      Since CARLA’s default pedestrian controller is limited (e.g., it sticks to the center of sidewalks and avoids nearby objects), we modify pedestrian paths to simulate realistic behaviors like veering and navigating close to environmental elements. This mirrors how blind individuals use tactile cues to explore their surroundings.
+        We adapt CARLA to support rule-based instruction generation for assistive navigation, informed by real-world studies and feedback from O&M experts. 
+        Pedestrians are equipped with egocentric sensors and randomized goals across varied towns and weather. 
+        <!-- To simulate realistic behaviors, we modify default pedestrian paths—introducing veering and proximity to environmental elements—mirroring how blind users rely on tactile cues to navigate. -->
+        <!-- We adapt the CARLA simulator to support rule-based instruction generation for assistive navigation. 
+        The simulation is informed by real-world studies and feedback from orientation and mobility experts. 
+        Pedestrians are spawned with egocentric sensors and randomized goals across different town and weather conditions.
+        Since CARLA’s default pedestrian controller is limited (e.g., it sticks to the center of sidewalks and avoids nearby objects), we modify pedestrian paths to simulate realistic behaviors like veering and navigating close to environmental elements. 
+        This mirrors how blind individuals use tactile cues to explore their surroundings. -->
       </p>
       
+      <p>
       <strong>Sampling Realistic Paths: </strong>
-      We increase path diversity by sampling waypoints near buildings and curbs and adding noise to simulate veering. Walkable regions are extracted using semantic maps, and route planning is handled with A* search. These paths generate video data at 1 frame per second, along with metadata such as obstacle type, location, sensor readings, and weather.
-      <br>
-      <strong>Instruction Generation: </strong>
-      Instructions are generated using a Compound Action Specification (CAS) based on user orientation, route progress, and environment context. Each instruction includes: Action, Direction, and Angle.
-      We add context with nearby object or landmark descriptions (e.g., “building on the right”) using nine object types: building, fence, pedestrian, pole, vegetation, vehicle, wall, traffic sign. Relative directions are: in front, left, right.
-      Objects within 1.5m (cane range) trigger instructions like: ''Continue forward. Be careful, pole in front. Turn slightly left. Vehicle on your right.''
-      A bird’s-eye view (from segmentation and depth maps) helps calculate distances. We also predict pedestrian movement using a bicycle model to time cues in advance.
-      <br>
-      <strong>Event-Driven Navigation Prompts: </strong>
-      While on sidewalks, instructions are triggered when a turn is required or an obstacle is detected within 1.5m. For example: ''Walk along the wall on your right.''
-      At junctions, minimal instruction is used to avoid distraction. Example prompts include: ''Approaching junction in five meters.'', ''You are entering/crossing a junction.'', ''You have exited the junction.''
-      We also log the reasoning behind issuing or withholding instructions, such as obstacle detection, path turning, or being inside a junction.
+        We increase path diversity by sampling waypoints near buildings and curbs and adding noise to simulate veering, as shown in <a href="#fig1">Figure 1</a>. 
+        Walkable regions are extracted using semantic maps, and route planning is handled with A* search. These paths generate video data at one frame per second, along with metadata such as obstacle type, location, and weather.
+      </p>
       
-      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+      <p>
+      <strong>Instruction Generation: </strong>
+        Instructions are generated using a Compound Action Specification (CAS) based on user orientation, route progress, and environment context. Each instruction includes: Action, Direction, and Angle.
+        We add context with nearby object or landmark descriptions (e.g., “building on the right”) using nine object types: building, fence, pedestrian, pole, vegetation, vehicle, wall, traffic sign. Relative directions are: in front, left, right, slightly left, slightly right, around.
+        Objects within 1.5m (cane range) trigger instructions like: ''Continue walking forward. Be careful, pole in front. Then turn slightly left. Vehicle on your right.''
+        A bird’s-eye view (from segmentation and depth maps) helps calculate distances. 
+      </p>
+      
+      <p>
+      <strong>Event-Driven Navigation Prompts: </strong>
+        While on sidewalks, instructions are triggered when a turn is required or an obstacle is detected within 1.5m. 
+        <!-- For example: ''Walk along the wall on your right.'' -->
+        At junctions, minimal instruction is used to avoid distraction. Example prompts include: ''You are approaching junction in five meters.'', ''You have exited the junction.''
+        We also log the reasoning behind issuing or withholding instructions, such as obstacle detection, path turning, or being inside a junction.
+      </p>
+      
+      <figure id="fig1" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
         <img src="./resources/supp1.png" 
              style="width:100%; height:auto; display:block; margin:0 auto;" 
              alt="Pedestrian Paths"> 
-        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
           <strong>Figure 1: Extracting Layout Details for Modified Pedestrian Paths.</strong>  We extract walkable and
           sidewalk space in the map, and employ it to sample waypoints nearby buildings and curbs. In
-          the figure, red denotes sidewalk space and white and green denotes road or obstructed space. The
+          the figure, <span style="background-color: red; color: black;">red</span> denotes sidewalk space and white and green denotes road or obstructed space. The
           sampled waypoints are then provided as intermediate goals to guide path planning for spawned
           pedestrians during data collection. This ensures a realistic and challenging benchmark.
         </figcaption>
