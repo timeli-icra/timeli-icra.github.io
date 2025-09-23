@@ -320,11 +320,10 @@
       <div class="box" style="width: 80%; margin: 0 auto;">
         <pre><code>
           You are guiding a blind person. The blind person needs to approach the goal
-          [x,y]={goal coordinate} located in relative longitudinal and latitudinal offsets
-          in meters.
-          Generate an instruction for the current frame. You will need to provide step-by-
-          step verbal navigation instructions to help them reach the destination safely and
-          efficiently. Instruct the user to stay on the path to the goal, only notify what is
+          [x,y]={goal coordinate} located in relative longitudinal and latitudinal offsets in meters.
+          Generate an instruction for the current frame. You will need to provide step-by-step verbal 
+          navigation instructions to help them reach the destination safely and efficiently. 
+          Instruct the user to stay on the path to the goal, only notify what is
           needed, including immediate turns they need to make and obstacles to avoid
           within 1.5m (cane distance). Keep the instructions in junctions minimal for
           safety to avoid distraction as the user relies on hearing to navigate and listen
@@ -342,8 +341,10 @@
           Input: goal: [x,y]=[0,-1], Output: Turn around. There’s a fence on your left.
         </code></pre>
       </div>
-
-      <h4 class="title is-5">Basic Prompt for Fine-tuning:</h4>
+      
+      <p>
+        <h4 class="title is-5">Basic Prompt for Fine-tuning:</h4>To analyze the role of inputs to the model, we first fine-tune models with the basic prompt below, which contains the goal coordinate and instructions to guide users.
+      </p>
       <div class="box" style="width: 80%; margin: 0 auto;">
         <pre><code>
           You are guiding a blind person. The blind person needs to approach the goal
@@ -359,8 +360,12 @@
           return the instruction to convey. Return “None” for remaining silent.
         </code></pre>
       </div>
-
-      <h4 class="title is-5">Prompt with History, Plan, and Reason Prediction for Finetuning:</h4>
+      <p>
+      <h4 class="title is-5">Prompt with History, Plan, and Reason Prediction for Finetuning:</h4> 
+        The models denoted by
+        ‘+’ are trained with the below prompt, which contains history, plan, information and prompting
+        instruction to predict reasons for the navigation instruction, as shown next:
+      <\p>
       <div class="box" style="width: 80%; margin: 0 auto;">
         <pre><code>
           You are guiding a blind person. The blind person needs to approach the goal
@@ -385,10 +390,19 @@
         </code></pre>
       </div>
   
-
+      <br>
       <h3 id="sec2-2" class="title is-4">2.2 Metric Definitions</h3>
       <p>SCT, assistance score (AS)</p>
+      <p>
+        Our rule-based instruction timing is consistent and event-driven, enabling models to learn accurate timing behaviors. 
+        We evaluate this using a strict metric that checks whether model instructions occur within 1 second of ground truth cues, reporting F1 and AUC scores.
+        To reflect the safety-critical nature of some cues—e.g., late turn instructions risking collisions—multiple instructions within the window are counted as false positives.
+        We further report <strong>Safety-Critical Timing (SCT)</strong>, which focuses on key events like collisions and junction transitions. 
+        For each, if the closest non-silent instruction before or after the event correctly references it, it is considered correct. 
+        SCT is defined as: <code>SCT = N_correct-safety / N_total-safety</code>, where <code>N_correct-safety</code> is the number of safety-critical events with correctly timed instructions, and <code>N_total-safety</code> is the total number of such events.
+      </p>
 
+      <br>
       <h3 id="sec2-3" class="title is-4">2.3 Realistic Closed-Loop Evaluation with Noisy Conditions</h3>
       <p>
         We evaluate model performance in a closed-loop manner by conducting interactive experiments and evaluations in a blind simulation environment.
@@ -396,7 +410,7 @@
         we further add Gaussian noise to both the goal coordinates (Gaussian noise with mean = 0°, SD = 2.0m) and the pedestrian’s orientation (Gaussian noise with mean = 0°, SD = 5°).
       </p>
 
-
+      <br><br>
       <h2 id="sec3" class="title is-2">3 Additional Experimental Analysis</h2>
       <h3 id="sec3-1" class="title is-4">3.1 Results Summary</h3>
       <p>
