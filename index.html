@@ -310,9 +310,13 @@
       
       <h2 id="sec2" class="title is-2">2 Experimental Settings</h2>
       <h3 id="sec2-1" class="title is-4">2.1 Prompt and Input Settings</h3>
-
       
+
+      <p>
       <h4 class="title is-5">In-Context Learning Prompt for Off-The-Shelf Models:</h4>
+        We find that prompt design plays a crucial role in enabling models to understand the information needs of blind end-users.
+        In our baseline prompt for off-the-shelf model analysis, we provide goal coordinates (a 2D vector representing a relative target, see Section 3.1 of the main paper), along with instruction prompts guiding the LLM to generate navigation directions, as illustrated below.
+      </p>
       <div class="box" style="width: 80%; margin: 0 auto;">
         <pre><code>
           You are guiding a blind person. The blind person needs to approach the goal
