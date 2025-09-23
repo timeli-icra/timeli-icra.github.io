@@ -414,16 +414,21 @@
       <h2 id="sec3" class="title is-2">3 Additional Experimental Analysis</h2>
       <h3 id="sec3-1" class="title is-4">3.1 Results Summary</h3>
       <p>
-        Fig. 3 summarizes the performance of fine-tuned models on
+        <strong>Open-Loop Evaluation Summary:</strong> <a href="#fig3">Figure 3</a> summarizes the performance of fine-tuned models on TIMELI in an open-loop simulation setting. 
+        The results highlight key challenges in interactive decision-making: models frequently exhibit poor timing, confuse directional instructions (e.g., "left" vs. "right"), and tend to generate overly verbose responses.
+      </p>
+
+      <!-- <p>
+        <a href="#fig3">Figure 3</a>. summarizes the performance of fine-tuned models on
         TIMELI, evaluated in the open-loop simulation setting. The plot highlights the challenges of the
         interactive decision-making task: current models often exhibit inappropriate timing, frequently
         confuse instruction directions (e.g., “left” vs. “right”), and generate overly verbose responses.
-      </p>
-        <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+      </p> -->
+        <figure id="fig3" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
           <img src="./resources/supp4_piechart.png" 
                style="width:80%; height:auto; display:block; margin:0 auto;" 
                alt="Pedestrian Paths"> 
-          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
             <strong>Figure 3: Radar Plot for Fine-tuned Models in Simulation.</strong> We leverage the proposed video-based
             assistive navigation task to evaluate multiple dimensions of instruction generation models. 
             By finetuning models on our TIMELI benchmark, we observe that existing models frequently make errors in
@@ -433,7 +438,6 @@
             direction (Instruction Direction).
           </figcaption>
         </figure>
-      <p>...</p>
 
       <h3 id="sec3-2" class="title is-4">3.2 Model Components Ablation</h3>
       <p>
@@ -444,7 +448,12 @@
       </p>
 
       <h3 id="sec3-3" class="title is-4">3.3 Safety-Critical Timing Analysis</h3>
-      <p>...</p>
+      <p>
+        Certain mistimed instructions carry greater risk than others—for example, casual route reminders versus critical cues for entering junctions or avoiding imminent collisions.
+        <strong>Table 8</strong> summarizes the closed-loop simulation results using the <strong>Safety-Critical Timing (SCT)</strong> metric, with a breakdown by event type. Notably, 
+        <strong>LLaVA-v1.6+</strong> correctly issues safety alerts in only 28% of collision events and 39% of junction events, underscoring significant challenges for reliable real-world deployment.
+      </p>
+
 
       <h3 id="sec3-4" class="title is-4">3.4 Inference Time</h3>
       <p>
@@ -460,20 +469,27 @@
 
       <h3 id="sec3-6" class="title is-4">3.5 Preliminary Smartphone-based Evaluation</h3>
       <p>
-        Although the task remains challenging, we conducted a preliminary supervised user study with ten blind participants using a smartphone-based application to evaluate system performance and gather feedback. 
-        Figure 4 shows the system interface used during real-world closed-loop experiments. The system was developed on an iOS device and utilizes the Google Maps API for route planning to predefined destinations. 
+        Although the task remains challenging, we conducted a preliminary supervised user study with ten blind participants using a smartphone-based application to assess system performance and collect feedback. 
+        <strong>Figure 4</strong> shows the interface used in real-world closed-loop experiments, developed on iOS and integrated with the Google Maps API for route planning. Based on GPS data, 
+        the system computes local goal positions and issues corresponding commands. A front-facing camera captures 60 FPS video, which, combined with positional data, is processed by a lightweight MLLM to generate navigation instructions.
+        Non-silent outputs are delivered via a text-to-speech engine. We tested three real-world routes: two 50-meter paths with one turn, and a 100-meter route with two turns and an intersection. 
+        As shown in <strong>Table 10</strong>, the overall success rate was 40%, with most failures caused by static obstacles. Interestingly, dynamic obstacles (e.g., pedestrians, vehicles) often adjusted their paths, 
+        reducing collision risk. While the system is not yet ready for unsupervised daily use, these early results demonstrate the potential of our MLLM-based navigation framework to support blind users and guide future improvements.
+
+        <!-- Although the task remains challenging, we conducted a preliminary supervised user study with ten blind participants using a smartphone-based application to evaluate system performance and gather feedback. 
+        <a href="#fig4">Figure 4</a> shows the system interface used during real-world closed-loop experiments. The system was developed on an iOS device and utilizes the Google Maps API for route planning to predefined destinations. 
         Based on GPS coordinates from the API, it computes local goal positions and corresponding commands. A front-view camera captures images at 60 frames per second, which, along with the calculated data, 
         is passed to a lightweight MLLM that generates navigation instructions. If an instruction other than “None” (indicating silence) is produced, it is read aloud using a text-to-speech engine.
         We designed three real-world navigation routes using Google Maps: two 50-meter routes with a single turn, and one 100-meter route with two turns and an intersection. 
         As shown in Table 10, the overall success rate was 40%, with most failures due to collisions with static obstacles. Interestingly, dynamic obstacles such as pedestrians and vehicles often adjusted their paths, 
         reducing collision risk, whereas static obstacles presented a greater hazard. Although the current system is not yet suitable for unsupervised daily use, 
-        these initial results highlight the potential of our MLLM-based navigation framework to assist individuals with visual impairments and guide future development.
+        these initial results highlight the potential of our MLLM-based navigation framework to assist individuals with visual impairments and guide future development. -->
       </p>
-      <figure class="image" style="max-width:500px; margin:0 auto; text-align:center;">
+      <figure id="fig4" class="image" style="max-width:500px; margin:0 auto; text-align:center;">
           <img src="./resources/supp5_smartphone.png" 
                style="width:80%; height:auto; display:block; margin:0 auto;" 
                alt="Pedestrian Paths"> 
-          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
             <strong>Figure 4: iPhone App Interface</strong> We validate our model in closed-loop, real-world settings using an
             iPhone app instantiation. The app displays the front-view image on the left and the planned path to
             the destination (via Google Maps) on the right. Instructions are shown at the top and also delivered
