@@ -341,7 +341,8 @@
           Input: goal: [x,y]=[0,-1], Output: Turn around. There’s a fence on your left.
         </code></pre>
       </div>
-      
+
+      <br>
       <p>
         <h4 class="title is-5">Basic Prompt for Fine-tuning:</h4>To analyze the role of inputs to the model, we first fine-tune models with the basic prompt below, which contains the goal coordinate and instructions to guide users.
       </p>
@@ -360,6 +361,8 @@
           return the instruction to convey. Return “None” for remaining silent.
         </code></pre>
       </div>
+
+      <br>
       <p>
       <h4 class="title is-5">Prompt with History, Plan, and Reason Prediction for Finetuning:</h4> 
         The models denoted by
@@ -439,6 +442,7 @@
           </figcaption>
         </figure>
 
+      <br>
       <h3 id="sec3-2" class="title is-4">3.2 Model Components Ablation</h3>
       <p>
         To evaluate the contribution of various components in our model—such as input instruction history, high-level navigation plans, 
@@ -447,6 +451,7 @@
         In particular, adding direct supervision for reason prediction leads to a significant boost, helping the model better interpret and communicate the rationale behind navigation instructions.
       </p>
 
+      <br>
       <h3 id="sec3-3" class="title is-4">3.3 Safety-Critical Timing Analysis</h3>
       <p>
         Certain mistimed instructions carry greater risk than others—for example, casual route reminders versus critical cues for entering junctions or avoiding imminent collisions.
@@ -454,7 +459,7 @@
         <strong>LLaVA-v1.6+</strong> correctly issues safety alerts in only 28% of collision events and 39% of junction events, underscoring significant challenges for reliable real-world deployment.
       </p>
 
-
+      <br>
       <h3 id="sec3-4" class="title is-4">3.4 Inference Time</h3>
       <p>
         We evaluate the trade-off between inference time and model performance with and without the early exit mechanism. 
@@ -467,6 +472,7 @@
 <!--       <h3 id="sec3-5" class="title is-4">3.5 Model Generalization to BDD</h3>
       <p>...</p> -->
 
+      <br>
       <h3 id="sec3-6" class="title is-4">3.5 Preliminary Smartphone-based Evaluation</h3>
       <p>
         Although the task remains challenging, we conducted a preliminary supervised user study with ten blind participants using a smartphone-based application to assess system performance and collect feedback. 
@@ -496,19 +502,20 @@
             through audio.
           </figcaption>
         </figure>
-
+        
+      <br><br>
       <h2 id="sec4" class="title is-2">4 Additional Qualitative Results</h2>
       <p>
-        The results of our closed-loop experiments are shown in Figure 5. While failures do occur—such as users veering off the intended path—the models often succeed in guiding users back on track. 
+        <strong>Closed-loop Visualization:</strong> The results of our closed-loop experiments are shown in <a href="#fig5">Figure 5</a>. While failures do occur—such as users veering off the intended path—the models often succeed in guiding users back on track. 
         This recovery ability is likely attributed to the diversity in the training data, which includes variations in perspective and pedestrian path scenarios.
       </p>
 
-      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+      <figure id="fig5" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
           <img src="./resources/supp6_closedloop_vis.png" 
                style="width:100%; height:auto; display:block; margin:0 auto;" 
                alt="Pedestrian Paths"> 
-          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
-            <strong>Figure 6: Closed-loop Visualization.</strong> We present success and failure cases from the closed-loop
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+            <strong>Figure 5: Closed-loop Visualization.</strong> We present success and failure cases from the closed-loop
             navigation evaluation. The blue line shows the intended route, and the orange line shows the path a
             follower walks based on the instructions of a TIMELI-trained model. For failure cases, the model
             demonstrates an ability to recover from deviations by issuing corrective instructions. However, the
@@ -517,58 +524,73 @@
           </figcaption>
         </figure>
 
+      <p>
+        <strong>Open-loop Examples:</strong> The figures below illustrate model differences in open-loop navigation scenarios. In <strong>Fig. 7</strong> and <strong>Fig. 8</strong>, we show qualitative comparisons between LLaVA-v1.6 (trained on our benchmark) and GPT-4o. LLaVA-v1.6 exhibits better situational awareness, while GPT-4o tends to generate overly verbose and frequent instructions. <strong>Fig. 9</strong> through <strong>Fig. 11</strong> highlight successful predictions on real-world video data from both models. However, as shown in <strong>Fig. 12</strong>, LLaVA-v1.6+ still fails to guide the pedestrian correctly in some cases—failures also captured by our Safety-Critical Timing (SCT) metric.
+      </p>
 
-      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+      <figure id="fig6" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
         <img src="./resources/result1.png" 
              style="width:100%; height:auto; display:block; margin:0 auto;" 
              alt="Pedestrian Paths"> 
-        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
-          <strong>Figure 7: .
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 6: <strong>Success Case in Simulation for LLaVA-v1.6+:</strong> 
+            The LLaVA model successfully alerts the pedestrian upon entering a junction, remains silent while crossing, and then instructs them to turn right to avoid a nearby motorcycle.
+            In contrast, GPT-4o incorrectly states that the pedestrian is <em>approaching</em> the junction, even though they are already at it, and fails to provide further instructions in the final frame.
         </figcaption>
       </figure>
 
-      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+      <figure id="fig7" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
         <img src="./resources/result2.png" 
              style="width:100%; height:auto; display:block; margin:0 auto;" 
              alt="Pedestrian Paths"> 
-        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
-          <strong>Figure 7: .
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 7: <strong>Success Case in Simulation for LLaVA-v1.6:</strong> 
+            The LLaVA model alerts pedestrians that they are approaching a junction and warns them of an obstacle, offering timely and context-aware guidance.
+            While GPT-4o provides correct instructions, it issues them in every frame, leading to overly frequent and potentially distracting feedback.
         </figcaption>
       </figure>
 
-      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+      <figure id="fig8" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
         <img src="./resources/result3.png" 
              style="width:100%; height:auto; display:block; margin:0 auto;" 
              alt="Pedestrian Paths"> 
-        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
-          <strong>Figure 7: .
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 8: <strong>Success Case in Real-World for LLaVA-v1.6:</strong> 
+            In this real-world scenario, LLaVA effectively communicates information about the surroundings—including vegetation, fences, buildings, and pedestrians—while guiding navigation. 
+            Although GPT-4o provides appropriate instructions as well, its verbose and continuous output in every frame results in distracting guidance.
         </figcaption>
       </figure>
 
-      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+      <figure id="fig9" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
         <img src="./resources/result4.png" 
              style="width:100%; height:auto; display:block; margin:0 auto;" 
              alt="Pedestrian Paths"> 
-        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
-          <strong>Figure 7: .
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 9: <strong>Success Case in Real-World for LLaVA-v1.6:</strong> 
+            In this scenario, LLaVA effectively instructs the pedestrian to stop before a junction as a car approaches, directs them to cross once it is safe, 
+            and then alerts them to potential danger after crossing. While GPT-4o also provides appropriate instructions, its guidance is more verbose than LLaVA’s.
         </figcaption>
       </figure>
 
-      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+      <figure id="fig10" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
         <img src="./resources/result5.png" 
              style="width:100%; height:auto; display:block; margin:0 auto;" 
              alt="Pedestrian Paths"> 
-        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
-          <strong>Figure 7: .
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 10: <strong>Success Case in Real-World for LLaVA-v1.6:</strong>
+            In this scenario, LLaVA effectively instructs the pedestrian to stop before a junction as a car approaches, directs them to cross once the car has passed, and then alerts them to potential danger after crossing. 
+            Although GPT-4o also provides appropriate instructions, its guidance is more verbose than LLaVA’s.
         </figcaption>
       </figure>
 
-      <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+      <figure id="fig11" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
         <img src="./resources/result6.png" 
              style="width:100%; height:auto; display:block; margin:0 auto;" 
              alt="Pedestrian Paths"> 
-        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
-          <strong>Figure 7: .
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 11: <strong>Failure Case in Real-World for LLaVA-v1.6 and GPT-4o:</strong> 
+            In this scenario, LLaVA correctly notifies the pedestrian about entering a junction but mistakenly directs them to move forward despite an approaching car. 
+            GPT-4o successfully instructs the pedestrian to stop but then inconsistently tells them to proceed in the intermediate frame.
         </figcaption>
       </figure>
 
