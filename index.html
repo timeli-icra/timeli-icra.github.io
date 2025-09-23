@@ -450,14 +450,23 @@
         The results show that each added component consistently improves the model’s performance across both evaluation modes. 
         In particular, adding direct supervision for reason prediction leads to a significant boost, helping the model better interpret and communicate the rationale behind navigation instructions.
       </p>
+        
 
       <br>
       <h3 id="sec3-3" class="title is-4">3.3 Safety-Critical Timing Analysis</h3>
       <p>
         Certain mistimed instructions carry greater risk than others—for example, casual route reminders versus critical cues for entering junctions or avoiding imminent collisions.
-        <strong>Table 8</strong> summarizes the closed-loop simulation results using the <strong>Safety-Critical Timing (SCT)</strong> metric, with a breakdown by event type. Notably, 
+        <a href="#tab1">Table 1</a> summarizes the closed-loop simulation results using the <strong>Safety-Critical Timing (SCT)</strong> metric, with a breakdown by event type. Notably, 
         <strong>LLaVA-v1.6+</strong> correctly issues safety alerts in only 28% of collision events and 39% of junction events, underscoring significant challenges for reliable real-world deployment.
       </p>
+        <figure id="tab1" class="image" style="max-width:1200px; margin:0 auto; text-align:center;">
+          <img src="./resources/table_sct.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+            <strong>Table 1: Safety-Critical Timing Analysis.</strong>  We report the overall SCT scores across MLLMs, along with event-specific SCT scores for each type of key event.
+          </figcaption>
+        </figure>
 
       <br>
       <h3 id="sec3-4" class="title is-4">3.4 Inference Time</h3>
@@ -479,7 +488,7 @@
         <strong>Figure 4</strong> shows the interface used in real-world closed-loop experiments, developed on iOS and integrated with the Google Maps API for route planning. Based on GPS data, 
         the system computes local goal positions and issues corresponding commands. A front-facing camera captures 60 FPS video, which, combined with positional data, is processed by a lightweight MLLM to generate navigation instructions.
         Non-silent outputs are delivered via a text-to-speech engine. We tested three real-world routes: two 50-meter paths with one turn, and a 100-meter route with two turns and an intersection. 
-        As shown in <strong>Table 10</strong>, the overall success rate was 40%, with most failures caused by static obstacles. Interestingly, dynamic obstacles (e.g., pedestrians, vehicles) often adjusted their paths, 
+        As shown in <a href="#tab2">Table 2</a>, the overall success rate was 40%, with most failures caused by static obstacles. Interestingly, dynamic obstacles (e.g., pedestrians, vehicles) often adjusted their paths, 
         reducing collision risk. While the system is not yet ready for unsupervised daily use, these early results demonstrate the potential of our MLLM-based navigation framework to support blind users and guide future improvements.
 
         <!-- Although the task remains challenging, we conducted a preliminary supervised user study with ten blind participants using a smartphone-based application to evaluate system performance and gather feedback. 
@@ -500,6 +509,17 @@
             iPhone app instantiation. The app displays the front-view image on the left and the planned path to
             the destination (via Google Maps) on the right. Instructions are shown at the top and also delivered
             through audio.
+          </figcaption>
+        </figure>
+
+        <figure id="tab2" class="image" style="max-width:1200px; margin:0 auto; text-align:center;">
+          <img src="./resources/table_smartphone.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+            <strong>Table 2: Smartphone-Based, Closed-Loop Real-World Study.</strong>   We conduct a real-world study
+            using a smartphone-based system with ten participants. Each participant was instructed to walk along
+            a predefined route while strictly following the system’s spoken navigation instructions.
           </figcaption>
         </figure>
         
