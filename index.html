@@ -517,7 +517,7 @@ metrics.
         <strong>Figure 4</strong> shows the interface used in real-world closed-loop experiments, developed on iOS and integrated with the Google Maps API for route planning. Based on GPS data, 
         the system computes local goal positions and issues corresponding commands. A front-facing camera captures 60 FPS video, which, combined with positional data, is processed by a lightweight MLLM to generate navigation instructions.
         Non-silent outputs are delivered via a text-to-speech engine. We tested three real-world routes: two 50-meter paths with one turn, and a 100-meter route with two turns and an intersection. 
-        As shown in <a href="#tab2">Table 2</a>, the overall success rate was 40%, with most failures caused by static obstacles. Interestingly, dynamic obstacles (e.g., pedestrians, vehicles) often adjusted their paths, 
+        As shown in <a href="#tab2">Table 4</a>, the overall success rate was 40%, with most failures caused by static obstacles. Interestingly, dynamic obstacles (e.g., pedestrians, vehicles) often adjusted their paths, 
         reducing collision risk. While the system is not yet ready for unsupervised daily use, these early results demonstrate the potential of our MLLM-based navigation framework to support blind users and guide future improvements.
 
         <!-- Although the task remains challenging, we conducted a preliminary supervised user study with ten blind participants using a smartphone-based application to evaluate system performance and gather feedback. 
@@ -547,7 +547,7 @@ metrics.
                style="width:100%; height:auto; display:block; margin:0 auto;" 
                alt="Pedestrian Paths"> 
           <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
-            <strong>Table 2: Smartphone-Based, Closed-Loop Real-World Study.</strong>   We conduct a real-world study
+            <strong>Table 4: Smartphone-Based, Closed-Loop Real-World Study.</strong>   We conduct a real-world study
             using a smartphone-based system with ten participants. Each participant was instructed to walk along
             a predefined route while strictly following the system’s spoken navigation instructions.
           </figcaption>
