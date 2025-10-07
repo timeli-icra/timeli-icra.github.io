@@ -445,10 +445,10 @@
       <br>
       <h3 id="sec3-2" class="title is-4">3.2 Model Components Ablation</h3>
       <p>
-        To evaluate the contribution of various components in our model, such as input instruction history, high-level navigation plans, 
-        and reason prediction, we progressively add each element and assess performance in both open-loop and closed-loop settings. 
-        The results show that each added component consistently improves the model’s performance across both evaluation modes. 
-        In particular, adding direct supervision for reason prediction leads to a significant boost, helping the model better interpret and communicate the rationale behind navigation instructions.
+        To evaluate the impact of different components in our model, including input instruction history, high-level navigation plans, 
+        and reason prediction, we incrementally add each component into the model and evaluate its performance in both open-loop and closed-loop settings. 
+        <a href="#tab1">Table 1</a> and <a href="#tab2">Table 2</a> indicate that the incremental addition of each component consistently enhances the model’s performance across both open-loop and closed-loop evaluations. 
+        In particular, adding direct supervision for reason prediction shows a substantial improvement, which helps the model better understand and articulate the rationale behind navigation instructions.
       </p>
       <br>
       
@@ -458,23 +458,20 @@
                style="width:100%; height:auto; display:block; margin:0 auto;" 
                alt="Pedestrian Paths"> 
           <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
-            <strong>Table 1: Impact of Model Components in Open-Loop Setting.</strong> To analyze the impact of different
-components added to TIMELI models, we report the performance of each models by incrementally
-adding inputs (history and high-level plan) as well as output reason prediction. Notably, the direct
-reason prediction supervision leads to consistent improvements across all metrics.
+            <strong>Table 1: Impact of Model Components in Open-Loop Setting.</strong> To analyze the impact of different components added to TIMELI models, 
+            we report the performance of each models by incrementally adding inputs (history and high-level plan) as well as output reason prediction. 
+            Notably, the direct reason prediction supervision leads to consistent improvements across all metrics.
           </figcaption>
         </figure>
       <br>
-      <figure id="tab1" class="image" style="max-width:600px; margin:0 auto; text-align:center;">
+      <figure id="tab2" class="image" style="max-width:600px; margin:0 auto; text-align:center;">
           <img src="./resources/supp_closeloop_component.png" 
                style="width:100%; height:auto; display:block; margin:0 auto;" 
                alt="Pedestrian Paths"> 
           <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
-            <strong>Table 2: Impact of Model Components in Closed-Loop Setting.</strong>   To evaluate the impact of
-each component added to the TIMELI models, we report performance in the closed-loop setting
-by incrementally incorporating inputs (history, plan) and output reason prediction. Following the
-open-loop evaluation, the reason prediction module leads to consistent improvements across all
-metrics.
+            <strong>Table 2: Impact of Model Components in Closed-Loop Setting.</strong> To evaluate the impact of each component added to the TIMELI models,
+            we report performance in the closed-loop setting by incrementally incorporating inputs (history, plan) and output reason prediction. 
+            Following the open-loop evaluation, the reason prediction module leads to consistent improvements across all metrics.
           </figcaption>
         </figure>
         
@@ -483,12 +480,12 @@ metrics.
       <h3 id="sec3-3" class="title is-4">3.3 Safety-Critical Timing Analysis</h3>
       <p>
         Certain mistimed instructions carry greater risk than others—for example, casual route reminders versus critical cues for entering junctions or avoiding imminent collisions.
-        <a href="#tab1">Table 3</a> summarizes the closed-loop simulation results using the <strong>Safety-Critical Timing (SCT)</strong> metric, with a breakdown by event type. Notably, 
+        <a href="#tab3">Table 3</a> summarizes the closed-loop simulation results using the <strong>Safety-Critical Timing (SCT)</strong> metric, with a breakdown by event type. Notably, 
         <strong>LLaVA-v1.6+</strong> correctly issues safety alerts in only 28% of collision events and 39% of junction events, underscoring significant challenges for reliable real-world deployment.
       </p>
 
       <br>
-        <figure id="tab1" class="image" style="max-width:600px; margin:0 auto; text-align:center;">
+        <figure id="tab3" class="image" style="max-width:600px; margin:0 auto; text-align:center;">
           <img src="./resources/table_sct.png" 
                style="width:100%; height:auto; display:block; margin:0 auto;" 
                alt="Pedestrian Paths"> 
@@ -517,7 +514,7 @@ metrics.
         <strong>Figure 4</strong> shows the interface used in real-world closed-loop experiments, developed on iOS and integrated with the Google Maps API for route planning. Based on GPS data, 
         the system computes local goal positions and issues corresponding commands. A front-facing camera captures 60 FPS video, which, combined with positional data, is processed by a lightweight MLLM to generate navigation instructions.
         Non-silent outputs are delivered via a text-to-speech engine. We tested three real-world routes: two 50-meter paths with one turn, and a 100-meter route with two turns and an intersection. 
-        As shown in <a href="#tab2">Table 4</a>, the overall success rate was 40%, with most failures caused by static obstacles. Interestingly, dynamic obstacles (e.g., pedestrians, vehicles) often adjusted their paths, 
+        As shown in <a href="#tab4">Table 4</a>, the overall success rate was 40%, with most failures caused by static obstacles. Interestingly, dynamic obstacles (e.g., pedestrians, vehicles) often adjusted their paths, 
         reducing collision risk. While the system is not yet ready for unsupervised daily use, these early results demonstrate the potential of our MLLM-based navigation framework to support blind users and guide future improvements.
 
         <!-- Although the task remains challenging, we conducted a preliminary supervised user study with ten blind participants using a smartphone-based application to evaluate system performance and gather feedback. 
@@ -542,7 +539,7 @@ metrics.
         </figure>
 
         <br>
-        <figure id="tab2" class="image" style="max-width:600px; margin:0 auto; text-align:center;">
+        <figure id="tab4" class="image" style="max-width:600px; margin:0 auto; text-align:center;">
           <img src="./resources/table_smartphone.png" 
                style="width:100%; height:auto; display:block; margin:0 auto;" 
                alt="Pedestrian Paths"> 
