@@ -450,13 +450,40 @@
         The results show that each added component consistently improves the model’s performance across both evaluation modes. 
         In particular, adding direct supervision for reason prediction leads to a significant boost, helping the model better interpret and communicate the rationale behind navigation instructions.
       </p>
+      <br>
+      
+
+      <figure id="tab1" class="image" style="max-width:600px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp_openloop_component.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+            <strong>Table 1: Impact of Model Components in Open-Loop Setting.</strong> To analyze the impact of different
+components added to TIMELI models, we report the performance of each models by incrementally
+adding inputs (history and high-level plan) as well as output reason prediction. Notably, the direct
+reason prediction supervision leads to consistent improvements across all metrics.
+          </figcaption>
+        </figure>
+      <br>
+      <figure id="tab1" class="image" style="max-width:600px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp_closeloop_component.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+            <strong>Table 2: Impact of Model Components in Closed-Loop Setting.</strong>   To evaluate the impact of
+each component added to the TIMELI models, we report performance in the closed-loop setting
+by incrementally incorporating inputs (history, plan) and output reason prediction. Following the
+open-loop evaluation, the reason prediction module leads to consistent improvements across all
+metrics.
+          </figcaption>
+        </figure>
         
 
       <br>
       <h3 id="sec3-3" class="title is-4">3.3 Safety-Critical Timing Analysis</h3>
       <p>
         Certain mistimed instructions carry greater risk than others—for example, casual route reminders versus critical cues for entering junctions or avoiding imminent collisions.
-        <a href="#tab1">Table 1</a> summarizes the closed-loop simulation results using the <strong>Safety-Critical Timing (SCT)</strong> metric, with a breakdown by event type. Notably, 
+        <a href="#tab1">Table 3</a> summarizes the closed-loop simulation results using the <strong>Safety-Critical Timing (SCT)</strong> metric, with a breakdown by event type. Notably, 
         <strong>LLaVA-v1.6+</strong> correctly issues safety alerts in only 28% of collision events and 39% of junction events, underscoring significant challenges for reliable real-world deployment.
       </p>
 
@@ -466,7 +493,7 @@
                style="width:100%; height:auto; display:block; margin:0 auto;" 
                alt="Pedestrian Paths"> 
           <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
-            <strong>Table 1: Safety-Critical Timing Analysis.</strong>  We report the overall SCT scores across MLLMs, along with event-specific SCT scores for each type of key event.
+            <strong>Table 3: Safety-Critical Timing Analysis.</strong>  We report the overall SCT scores across MLLMs, along with event-specific SCT scores for each type of key event.
           </figcaption>
         </figure>
 
