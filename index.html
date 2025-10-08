@@ -397,12 +397,19 @@
       <h3 id="sec2-2" class="title is-4">2.2 Metric Definitions</h3>
       <!-- <p>SCT, assistance score (AS)</p> -->
       <p>
-        Our rule-based instruction timing is consistent and event-driven, enabling models to learn accurate timing behaviors. 
+        We leverage standard open and closed-loop instruction generation metrics throughout our analysis, including success rate (%), route completion (%), navigation score (%), navigation error (m), collision rates.
+        To directly quantify the models’ timing capabilities, we introduce timing-based metrics, specifically, classification F1 score and AUC.
+        In addition, to measure task-specific metrics that capture cognitive load, safety risk, or user trustworthiness, we further report <strong>Safety-Critical Timing (SCT)</strong>, <strong>Informativeness Score (IS)</strong>, and a holistic <strong>Assistance Score (AS)</strong>.
+        SCT focuses on key events such as collisions and junction transitions, which is defined as: <code>SCT = N_correct-safety / N_total-safety</code>, where <code>N_correct-safety</code> is the number of safety-critical events with correctly timed instructions, and <code>N_total-safety</code> is the total number of such events.
+        IS measures semantic conciseness and safety. For each instruction, we compute the ratio of the number of crucial event-related keywords it contains to the total number of words output by the model for that instruction.
+        AS is computed as the geometric mean of success rate (SR), route completion (RC), and task-oriented penalties (SCT, Informativeness), which combines the multifaceted aspects of assistive navigation into a unified metric.
+        <!-- Our rule-based instruction timing is consistent and event-driven, enabling models to learn accurate timing behaviors. 
         We evaluate this using a strict metric that checks whether model instructions occur within 1 second of ground truth cues, reporting F1 and AUC scores.
         To reflect the safety-critical nature of some cues—e.g., late turn instructions risking collisions—multiple instructions within the window are counted as false positives.
         We further report <strong>Safety-Critical Timing (SCT)</strong>, which focuses on key events like collisions and junction transitions. 
         For each, if the closest non-silent instruction before or after the event correctly references it, it is considered correct. 
         SCT is defined as: <code>SCT = N_correct-safety / N_total-safety</code>, where <code>N_correct-safety</code> is the number of safety-critical events with correctly timed instructions, and <code>N_total-safety</code> is the total number of such events.
+        In addition, we introducea holistic assistance score (AS), which combines the multifaceted aspects of assistive navigation into a unified metric. AS is computed as the geometric mean of success rate (SR), route completion (RC), and task-oriented penalties (SCT, Informativeness): -->
       </p>
 
       <br>
