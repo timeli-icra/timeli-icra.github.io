@@ -552,33 +552,15 @@
         
       <br><br>
       <h2 id="sec4" class="title is-2">4 Additional Qualitative Results</h2>
-      <p>
-        <strong>Closed-loop Visualization:</strong> The results of our closed-loop experiments are shown in <a href="#fig5">Figure 5</a>. While failures do occur, such as users veering off the intended path, the models often succeed in guiding users back on track. 
-        This recovery ability is likely attributed to the diversity in the training data, which includes variations in perspective and pedestrian path scenarios.
-      </p>
-
-      <figure id="fig5" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
-          <img src="./resources/supp6_closedloop_vis.png" 
-               style="width:100%; height:auto; display:block; margin:0 auto;" 
-               alt="Pedestrian Paths"> 
-          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
-            <strong>Figure 5: Closed-loop Visualization.</strong> We present success and failure cases from the closed-loop
-            navigation evaluation. The blue line shows the intended route, and the orange line shows the path a
-            follower walks based on the instructions of a TIMELI-trained model. For failure cases, the model
-            demonstrates an ability to recover from deviations by issuing corrective instructions. However, the
-            recovery process often incurs additional time, which can lead to failure to reach the destination within
-            the allotted time budget.
-          </figcaption>
-        </figure>
-      <br><br>
+      <br>
         
       <p>
         <strong>Open-loop Examples:</strong> The figures below illustrate model differences in open-loop navigation scenarios. 
         <!-- In <a href="#fig6">Figure 6</a> and <a href="#fig7">Figure 7</a>, we show qualitative comparisons between LLaVA-v1.6 (trained on our benchmark) and GPT-4o.  -->
-        In <a href="#fig6">Figure 6</a>, we show qualitative comparisons between LLaVA-v1.6 (trained on our benchmark) and GPT-4o. 
+        In <a href="#fig5">Figure 5</a>, we show qualitative comparisons between LLaVA-v1.6 (trained on our benchmark) and GPT-4o. 
         LLaVA-v1.6 exhibits better situational awareness, while GPT-4o tends to generate overly verbose and frequent instructions. 
-        In <a href="#fig7">Figure 7</a>, we show qualitative comparisons between LLaVA-v1.6 (trained on our benchmark) and GPT-4o. 
-        LLaVA-v1.6 exhibits better situational awareness, while GPT-4o tends to generate overly verbose and frequent instructions. 
+        <!-- In <a href="#fig7">Figure 7</a>, we show qualitative comparisons between LLaVA-v1.6 (trained on our benchmark) and GPT-4o. 
+        LLaVA-v1.6 exhibits better situational awareness, while GPT-4o tends to generate overly verbose and frequent instructions.  -->
         <!-- <a href="#fig8">Figure 8</a>, <a href="#fig9">Figure 9</a> and <a href="#fig10">Figure 10</a> highlight successful predictions on real-world video data from both models.  -->
         <!-- However, as shown in <a href="#fig11">Figure 11</a>, LLaVA-v1.6+ still fails to guide the pedestrian correctly in some cases， failures also captured by our Safety-Critical Timing (SCT) metric. -->
       </p>
@@ -596,31 +578,58 @@
 
         <br>
 
-      <figure id="fig6" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+      <figure id="fig5" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
         <img src="./resources/result2.png" 
              style="width:100%; height:auto; display:block; margin:0 auto;" 
              alt="Pedestrian Paths"> 
         <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
-          <strong>Figure 6: Examples in open-loop setting:</strong> 
+          <strong>Figure 5: Examples in open-loop setting:</strong> 
             The LLaVA model alerts pedestrians that they are approaching a junction and warns them of an obstacle, offering timely and context-aware guidance.
             While GPT-4o provides correct instructions, it issues them in every frame, leading to overly frequent and potentially distracting feedback.
         </figcaption>
       </figure>
 
        <br>
+      <p>
+        <strong>Closed-loop Examples:</strong> The figures below illustrate model differences in open-loop navigation scenarios. 
+        In <a href="#fig6">Figure 6</a>, we show qualitative comparisons between LLaVA-v1.6 (trained on our benchmark) and GPT-4o. 
+        LLaVA-v1.6 exhibits better situational awareness, while GPT-4o tends to generate overly verbose and frequent instructions. 
+      </p>
+       <br>
+      
 
       <figure id="fig6" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
         <img src="./resources/new_example_real.png" 
              style="width:100%; height:auto; display:block; margin:0 auto;" 
              alt="Pedestrian Paths"> 
         <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
-          <strong>Figure 7: Examples in closed-loop setting:</strong> 
+          <strong>Figure 6: Examples in closed-loop setting:</strong> 
             The LLaVA model alerts pedestrians that they are approaching a junction and warns them of an obstacle, offering timely and context-aware guidance.
             While GPT-4o provides correct instructions, it issues them in every frame, leading to overly frequent and potentially distracting feedback.
         </figcaption>
       </figure>
 
         <br>
+
+      <p>
+        <strong>Closed-loop Route Visualization:</strong> The results of our closed-loop experiments are shown in <a href="#fig7">Figure 7</a>. While failures do occur, such as users veering off the intended path, the models often succeed in guiding users back on track. 
+        This recovery ability is likely attributed to the diversity in the training data, which includes variations in perspective and pedestrian path scenarios.
+      </p>
+
+      <figure id="fig7" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp6_closedloop_vis.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+            <strong>Figure 7: Closed-loop Visualization.</strong> We present success and failure cases from the closed-loop
+            navigation evaluation. The blue line shows the intended route, and the orange line shows the path a
+            follower walks based on the instructions of a TIMELI-trained model. For failure cases, the model
+            demonstrates an ability to recover from deviations by issuing corrective instructions. However, the
+            recovery process often incurs additional time, which can lead to failure to reach the destination within
+            the allotted time budget.
+          </figcaption>
+        </figure>
+      <br>
 
       <!-- <figure id="fig8" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
         <img src="./resources/result3.png" 
