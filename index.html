@@ -399,10 +399,12 @@
       <p>
         We leverage standard open and closed-loop instruction generation metrics throughout our analysis, including success rate (%), route completion (%), navigation score (%), navigation error (m), collision rates.
         To directly quantify the models’ timing capabilities, we introduce timing-based metrics, specifically, classification F1 score and AUC.
+        <br>
         In addition, to measure task-specific metrics that capture cognitive load, safety risk, or user trustworthiness, we further report <strong>Safety-Critical Timing (SCT)</strong>, <strong>Informativeness Score (IS)</strong>, and a holistic <strong>Assistance Score (AS)</strong>.
         Specifically, SCT focuses on key events such as collisions and junction transitions, which is defined as: <code>SCT = N_correct-safety / N_total-safety</code>, where <code>N_correct-safety</code> is the number of safety-critical events with correctly timed instructions, and <code>N_total-safety</code> is the total number of such events.
         IS measures semantic conciseness and safety. For each instruction, we compute the ratio of the number of crucial event-related keywords it contains to the total number of words output by the model for that instruction.
         AS is computed as the geometric mean of success rate (SR), route completion (RC), and task-oriented penalties (SCT, Informativeness), which combines the multifaceted aspects of assistive navigation into a unified metric.
+          
         <!-- Our rule-based instruction timing is consistent and event-driven, enabling models to learn accurate timing behaviors. 
         We evaluate this using a strict metric that checks whether model instructions occur within 1 second of ground truth cues, reporting F1 and AUC scores.
         To reflect the safety-critical nature of some cues—e.g., late turn instructions risking collisions—multiple instructions within the window are counted as false positives.
@@ -484,11 +486,11 @@
         
 
       <br>
-      <h3 id="sec3-3" class="title is-4">3.3 Safety-Critical Timing Analysis</h3>
+      <h3 id="sec3-3" class="title is-4">3.3 Additionally Metrics Analysis</h3>
       <p>
-        Certain mistimed instructions carry greater risk than others, e.g., casual route reminders versus critical cues for entering junctions or avoiding imminent collisions.
-        <a href="#tab3">Table 3</a> summarizes the closed-loop simulation results using the <strong>Safety-Critical Timing (SCT)</strong> metric, with a breakdown by event type. Notably, 
-        <strong>LLaVA-v1.6+</strong> correctly issues safety alerts in only 28% of collision events and 39% of junction events, underscoring significant challenges for reliable real-world deployment.
+        Certain mistimed instructions carry greater risk than others, e.g., concise reminders along a route versus instructions for entering a junction or avoiding imminent collisions.
+        <a href="#tab3">Table 3</a> summarizes the closed-loop simulation results using the <strong>Safety-Critical Timing (SCT)</strong> with a breakdown by event type, the <strong>Informativeness Score (Informativeness)</strong>, and the <strong>Assistance Score</strong> metric. 
+        Notably, the proposed <strong>LLaVA-v1.6+</strong> is shown to outperform other models across the metrics consistently..
       </p>
 
       <br>
