@@ -212,7 +212,7 @@
         Using preliminary data, we designed navigation scenarios in CARLA and iteratively refined them with mobility guides. 
         <!-- Guides emphasized realism (e.g., user hesitation on unfamiliar routes), the value of frequent but short instructions, and exceptions where brief guidance is still needed at junctions. These insights were integrated into our simulation. -->
         We find that off-the-shelf models often issue repetitive, mistimed, or contextually incorrect instructions (as demonstrated in the video). 
-        To address this, we designed a rule-based instruction generator that emphasizes concise, timely feedback—triggered by distance to landmarks, fixed intervals, or deviations >30° during crossings.
+        To address this, we designed a rule-based instruction generator that emphasizes concise, timely feedback which is triggered by distance to landmarks, fixed intervals, or deviations >30° during crossings.
         We sampled 1,000 clips using this procedure, validated and refined them with guides, and produced the final benchmark.
         
         <!-- Given the preliminary data, we designed simulated navigation scenarios in CARLA. 
@@ -400,7 +400,7 @@
         We leverage standard open and closed-loop instruction generation metrics throughout our analysis, including success rate (%), route completion (%), navigation score (%), navigation error (m), collision rates.
         To directly quantify the models’ timing capabilities, we introduce timing-based metrics, specifically, classification F1 score and AUC.
         In addition, to measure task-specific metrics that capture cognitive load, safety risk, or user trustworthiness, we further report <strong>Safety-Critical Timing (SCT)</strong>, <strong>Informativeness Score (IS)</strong>, and a holistic <strong>Assistance Score (AS)</strong>.
-        SCT focuses on key events such as collisions and junction transitions, which is defined as: <code>SCT = N_correct-safety / N_total-safety</code>, where <code>N_correct-safety</code> is the number of safety-critical events with correctly timed instructions, and <code>N_total-safety</code> is the total number of such events.
+        Specifically, SCT focuses on key events such as collisions and junction transitions, which is defined as: <code>SCT = N_correct-safety / N_total-safety</code>, where <code>N_correct-safety</code> is the number of safety-critical events with correctly timed instructions, and <code>N_total-safety</code> is the total number of such events.
         IS measures semantic conciseness and safety. For each instruction, we compute the ratio of the number of crucial event-related keywords it contains to the total number of words output by the model for that instruction.
         AS is computed as the geometric mean of success rate (SR), route completion (RC), and task-oriented penalties (SCT, Informativeness), which combines the multifaceted aspects of assistive navigation into a unified metric.
         <!-- Our rule-based instruction timing is consistent and event-driven, enabling models to learn accurate timing behaviors. 
@@ -486,7 +486,7 @@
       <br>
       <h3 id="sec3-3" class="title is-4">3.3 Safety-Critical Timing Analysis</h3>
       <p>
-        Certain mistimed instructions carry greater risk than others—for example, casual route reminders versus critical cues for entering junctions or avoiding imminent collisions.
+        Certain mistimed instructions carry greater risk than others, e.g., casual route reminders versus critical cues for entering junctions or avoiding imminent collisions.
         <a href="#tab3">Table 3</a> summarizes the closed-loop simulation results using the <strong>Safety-Critical Timing (SCT)</strong> metric, with a breakdown by event type. Notably, 
         <strong>LLaVA-v1.6+</strong> correctly issues safety alerts in only 28% of collision events and 39% of junction events, underscoring significant challenges for reliable real-world deployment.
       </p>
@@ -506,7 +506,7 @@
       <p>
         We evaluate the trade-off between inference time and model performance with and without the early exit mechanism. 
         The large LLaVA-v1.6 model has a runtime of 1.22 seconds per frame, while the tiny model runs at 0.77 seconds per frame. 
-        With early exit enabled, we observe a significant reduction in inference time with minimal impact on performance—for example, 
+        With early exit enabled, we observe a significant reduction in inference time with minimal impact on performance, e.g., 
         the large model’s runtime decreases to 0.99 seconds per frame, achieving an 18.85% speedup, 
         while key metrics such as route completion score in closed-loop evaluation remain unaffected.
       </p>
