@@ -604,6 +604,43 @@
       </figure>
 
        <br>
+
+      <figure id="fig5" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/new_example_sim2.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 5: Example in open-loop setting:</strong> 
+            Although GPT-4o can generate instructions that appear reasonable, it lacks <em>temporal, spatial, and safety-critical</em> awareness in the open-loop setting.
+            At time <strong>t</strong>, even though the path ahead is clear and the pole was at a safe distance, GPT-4o generated an unnecessary instruction, asking the user to turn left.
+            At time <strong>t+1</strong>, GPT-4o issues another instruction before the previous one had finished, showing a lack of temporal awareness. Moreover, the model fails to recognize the presence of a junction, which is critical for blind users.
+            At time <strong>t+2</strong>, GPT-4o generate another instruction, asking the user to avoid a trash bin that was far away, indicating poor distance awareness of obstacles and resulting in redundant or unnecessary guidance.
+          
+            <!-- The LLaVA model alerts pedestrians that they are approaching a junction and warns them of an obstacle, offering timely and context-aware guidance.
+            While GPT-4o provides correct instructions, it issues them in every frame, leading to overly frequent and potentially distracting feedback. -->
+        </figcaption>
+      </figure>
+
+       <br>
+
+      <figure id="fig5" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/new_example_sim3.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 5: Example in open-loop setting:</strong> 
+            Although GPT-4o can generate instructions that appear reasonable, it lacks <em>temporal, spatial, and safety-critical</em> awareness in the open-loop setting.
+            At time <strong>t</strong>, even though the path ahead is clear and the pole was at a safe distance, GPT-4o generated an unnecessary instruction, asking the user to turn left.
+            At time <strong>t+1</strong>, GPT-4o issues another instruction before the previous one had finished, showing a lack of temporal awareness. Moreover, the model fails to recognize the presence of a junction, which is critical for blind users.
+            At time <strong>t+2</strong>, GPT-4o generate another instruction, asking the user to avoid a trash bin that was far away, indicating poor distance awareness of obstacles and resulting in redundant or unnecessary guidance.
+          
+            <!-- The LLaVA model alerts pedestrians that they are approaching a junction and warns them of an obstacle, offering timely and context-aware guidance.
+            While GPT-4o provides correct instructions, it issues them in every frame, leading to overly frequent and potentially distracting feedback. -->
+        </figcaption>
+      </figure>
+
+       <br>
+      
       <p>
         <strong>Closed-loop Example:</strong> The figures below illustrate model differences in closed-loop navigation scenarios. 
         Similar to open-loop settings, our qualitative examples (<a href="#fig6">Figure 6</a>, <a href="#fig7">7</a>, and <a href="#fig8">8</a>) show that GPT-4o lacks <em>temporal, spatial, and safety-critical</em> awareness, while
