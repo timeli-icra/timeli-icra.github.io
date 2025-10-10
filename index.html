@@ -567,7 +567,8 @@
         <strong>Open-loop Examples:</strong> The figures below illustrate model differences in open-loop navigation scenarios. 
         <!-- In <a href="#fig6">Figure 6</a> and <a href="#fig7">Figure 7</a>, we show qualitative comparisons between LLaVA-v1.6 (trained on our benchmark) and GPT-4o.  -->
         In <a href="#fig5">Figure 5</a>, <a href="#fig6">6</a>, and <a href="#fig7">7</a>, we show qualitative comparisons between LLaVA-v1.6 (trained on our benchmark) and GPT-4o. 
-        LLaVA-v1.6 exhibits better situational awareness, while GPT-4o tends to generate overly redundant and frequent instructions. 
+        <!-- We show that . -->
+        LLaVA-v1.6 exhibits better situational awareness, while GPT-4o lacks temporal, spatial, and safety-critical awareness in the open-loop setting and tends to generate overly redundant and frequent instructions. 
         <!-- In <a href="#fig7">Figure 7</a>, we show qualitative comparisons between LLaVA-v1.6 (trained on our benchmark) and GPT-4o. 
         LLaVA-v1.6 exhibits better situational awareness, while GPT-4o tends to generate overly verbose and frequent instructions.  -->
         <!-- <a href="#fig8">Figure 8</a>, <a href="#fig9">Figure 9</a> and <a href="#fig10">Figure 10</a> highlight successful predictions on real-world video data from both models.  -->
@@ -593,7 +594,7 @@
              alt="Pedestrian Paths"> 
         <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
           <strong>Figure 5: Example in open-loop setting:</strong> 
-            Although GPT-4o can generate instructions that appear reasonable, it lacks <em>temporal, spatial, and safety-critical</em> awareness in the open-loop setting.
+            <!-- Although GPT-4o can generate instructions that appear reasonable, it lacks <em>temporal, spatial, and safety-critical</em> awareness in the open-loop setting. -->
             At time <strong>t</strong>, even though the path ahead is clear and the pole was at a safe distance, GPT-4o generated an unnecessary instruction, asking the user to turn left.
             At time <strong>t+1</strong>, GPT-4o issues another instruction before the previous one had finished, showing a lack of temporal awareness. Moreover, the model fails to recognize the presence of a junction, which is critical for blind users.
             At time <strong>t+2</strong>, GPT-4o generate another instruction, asking the user to avoid a trash bin that was far away, indicating poor distance awareness of obstacles and resulting in redundant or unnecessary guidance.
