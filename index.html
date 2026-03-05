@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Project / Paper description" />
+  <meta name="keywords" content="navigation, dataset, accessibility" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Time-Aware Assistive Navigation</title>
+
+  <!-- Local CSS (replace with your own files if needed) -->
+  <link rel="stylesheet" href="./static/css/bulma.min.css" />
+  <link rel="stylesheet" href="./static/css/index.css" />
+
+  <meta property="og:site_name" content="{{PROJECT_NAME}}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{TITLE}}" />
+
+  <style>
+    .video-and-annotations { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+    .annotation-box { padding:12px; border-radius:6px; }
+    .annotation-box.high-level { background:#6e6e6e; color:#fff; }
+    .annotation-box.low-level { background:#e9e9e9; color:#111; }
+    .annotation-title { font-size:1.05rem; font-weight:600; margin-bottom:0.4rem; }
+    .publication-title { margin-bottom:0.5rem; }
+    .publication-links .link-block { margin-right:0.5rem; display:inline-block; margin-bottom:0.4rem; }
+    footer { margin-top:2.5rem; padding:1rem 0; }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">Time-Aware Assistive Navigation</h1>
+<!--         <div class="is-size-5 publication-authors">
+          <span class="author-block">{{Anonymous Submission}}</span>
+          <div class="brmod"></div>
+        </div> -->
+
+<!--         <div class="publication-links" style="margin-top:1rem;">
+          <span class="link-block">
+            <a href="./resources/paper.pdf" class="button is-normal is-rounded is-dark">
+              <span>Paper</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="#video_section" class="button is-normal is-rounded is-dark">
+              <span>Video</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="./resources/visualization.zip" class="button is-normal is-rounded is-dark">
+              <span>Visualization</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="./resources/data_archive.zip" class="button is-normal is-rounded is-dark">
+              <span>Data</span>
+            </a>
+          </span>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+    
+  <!-- Abstract -->
+  <section class="section">
+    <div class="container">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-two-thirds">
+                <h2 class="title is-3">Abstract</h2>
+                <div class="content has-text-justified">
+                    <p>
+                      Our TIMELI task goes beyond standard video-based summarization and indoor navigation benchmarks for MLLMs: we uniquely emphasize spatio-temporal coherence and planning in delivering continual language instructions under dynamic, end-user interactive settings. 
+                      On this website, we provide additional details on: 
+                      (1) <strong>benchmark construction</strong> and formulation, including data generation, annotation, and quality validation processes; 
+                      (2) full <strong>prompt structure</strong> and experimental details, including metric definitions; 
+                      (3) model ablations and additional <strong>results</strong>, including a preliminary validation in <strong>closed-loop real-world</strong> settings, 
+                      leveraging a <strong>smartphone-based app</strong> instantiation and generalization ablations on related <strong>real-world tasks</strong> to further study the benchmark's impact; and 
+                      (4) additional <strong>qualitative results</strong>, including both success and failure cases.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Video + Annotations -->
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+
+          <div class="columns video-and-annotations">
+            <div class="column is-full">
+              <div class="vis-video">
+                <video controls muted loop style="width:100%">
+                  <source src="./resources/TIMELI_supp.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+
+            <div class="column is-full">
+<!--               <h3 class="annotation-title">High-Level Annotation</h3>
+              <div class="annotation-box high-level"> -->
+                <div class="content">
+                  <p>
+                  This video is divided into four key segments (<strong>please enable audio</strong>):
+                  <ul>
+                    <li><strong>0:03 – 0:39</strong> <strong><em>TIMELI Benchmark</em></strong>: we show the collected simulation benchmark, which shows ground truth annotations paired with the front-view video.</li>
+                    <li><strong>0:40 – 1:12</strong> <strong><em>ChatGPT-4o Performance</em></strong>: ChatGPT-4o provides redundant instructions, and some new instructions are issued before the previous ones are completed, potentially overwhelming users.</li>
+                    <li><strong>1:13 – 2:05</strong> <strong><em>Finetuned Model Performance</em></strong>: our model learns not only <em>what</em> to say but also <em>when</em> to say it. As demonstrated, instructions are delivered at appropriate times without redundancy.</li>
+                    <li><strong>2:06 – 2:57</strong> <strong><em>Generalization to Real-World Videos</em></strong>: despite being trained only in simulation, our model demonstrates strong generalization to real-world scenarios on YouTube videos.</li>
+                  </ul>
+                </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Duplicate above block for more videos/annotations -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Data / Statistics -->
+<!--   <section class="section">
+    <div class="container has-text-centered">
+      <h2 class="title is-4">Data / Statistics</h2>
+      <div class="column">
+        <img src="./resources/data_statistic.png" alt="data statistics" style="max-width:100%;" />
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Video section -->
+<!--   <section id="video_section" class="section">
+    <div class="container has-text-centered">
+      <h2 class="title is-3">Video</h2>
+      <div class="publication-video">
+        <video controls style="max-width:100%;">
+          <source src="./resources/supplementary_video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Table of Contents -->
+  <section class="section">
+    <div class="container toc">
+      <h2 class="title is-3">Table of Contents</h2>
+      <ul>
+        <li><a href="#sec1">1 TIMELI Benchmark Details</a>
+          <ul>
+            <li><a href="#sec1-1">1.1 Informed Instruction Design</a></li>
+            <li><a href="#sec1-2">1.2 Adapting CARLA to Realistic Assistive Navigation Scenarios</a></li>
+            <li><a href="#sec1-3">1.3 Real-World Video Annotation Process</a></li>
+          </ul>
+        </li>
+        <li><a href="#sec2">2 Experimental Settings</a>
+          <ul>
+            <li><a href="#sec2-1">2.1 Prompt and Input Settings</a></li>
+            <!-- <li><a href="#sec2-2">2.2 Metric Definitions</a></li> -->
+            <li><a href="#sec2-2">2.2 Closed-Loop Evaluation with Noisy Conditions</a></li>
+          </ul>
+        </li>
+        <li><a href="#sec3">3 Additional Experimental Analysis</a>
+          <ul>
+            <li><a href="#sec3-1">3.1 Results Summary and Error Intervals</a></li>
+            <li><a href="#sec3-2">3.2 Model Components Ablation</a></li>
+            <li><a href="#sec3-3">3.3 Inference Time</a></li>
+<!--             <li><a href="#sec3-5">3.5 Model Generalization to BDD</a></li> -->
+            <li><a href="#sec3-4">3.4 Preliminary Smartphone-based Evaluation</a></li>
+          </ul>
+        </li>
+        <li><a href="#sec4">4 Additional Qualitative Results</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Sections -->
+  <section class="section">
+    <div class="container">
+      <h2 id="sec1" class="title is-2">1 TIMELI Benchmark Details</h2>
+      <h3 id="sec1-1" class="title is-4">1.1 Informed Instruction Design</h3>
+      <p>
+        TIMELI includes both a rule-based synthetic simulation benchmark and a human-annotated real-world benchmark, each developed and validated through iterative design.
+        <!-- Our instruction design is based on real-world orientation and mobility (O&M) principles used to guide visually impaired individuals. Navigation through unfamiliar, complex environments remains a cognitively demanding and risky task, especially around intersections and moving obstacles. -->
+      </p>
+      <p>
+        <strong>Iterative Design with Orientation and Mobility (O&M) Guides:</strong>
+        We conducted a two-hour focus group with three mobility guides ($50/hr) on real-world guidance strategies (e.g., clock orientation, affirmations at intersections, silence otherwise). 
+        Guides later supported blind participants remotely, emphasizing salient objects within cane range. While our focus was on cane users, guides noted guide dog users may also benefit from off-ground contextual cues.
+        We find that effective guidance requires fine-grained 3D scene understanding beyond simple turn/object classification, and that user-specific preferences motivate future personalization.
+        <!-- We initially performed a focus group with three local orientation and mobility guides regarding real-world scenarios and guidance design. 
+        The Zoom session lasted two hours, and guides were paid for their time ($50 an hour). During the session, guides reported various support strategies, such as providing clock orientation, frequent affirmation at safety-critical tasks when just entering or exiting an intersection (i.e., junctions), 
+        and maintaining silence around them. For transparency, we will release the transcripts from the sessions alongside the benchmark.
+        Subsequently, we asked guides to remotely support blind participants in an in-situ, real-world study. 
+        A recurrent theme involved only alerting users of the most salient environmental characteristics, defined at the span of the white cane. 
+        While we focus on white cane users (the most frequent mobility aid used today), guides also mentioned that guide dog users could benefit from contextual information about the subset of off-ground objects in their path. 
+        However, users generally offloaded object avoidance tasks to their guide dogs.
+        While MLLMs seem to fail at basic instructional logic, we also emphasize that correct instruction requires a fine-grained and precise 3D understanding of scene context, 
+        and the instruction set can be high-dimensional at times beyond basic classification of turn direction and objects, i.e., due to rich environmental descriptions that help navigators. 
+        Moreover, we also observed indications for differing preferences and personalization, an aspect which we plan to study in the future. -->
+      </p>
+      <p>
+        <strong>Synthetic Scenarios:</strong>
+        Using preliminary data, we designed navigation scenarios in CARLA and iteratively refined them with mobility guides. 
+        <!-- Guides emphasized realism (e.g., user hesitation on unfamiliar routes), the value of frequent but short instructions, and exceptions where brief guidance is still needed at junctions. These insights were integrated into our simulation. -->
+        We find that off-the-shelf models often issue repetitive, mistimed, or contextually incorrect instructions (as demonstrated in the video). 
+        To address this, we designed a rule-based instruction generator that emphasizes concise, timely feedback which is triggered by distance to landmarks, fixed intervals, or deviations >30° during crossings.
+        We sampled 1,000 clips using this procedure, validated and refined them with guides, and produced the final benchmark.
+        
+        <!-- Given the preliminary data, we designed simulated navigation scenarios in CARLA. 
+        The simulated scenarios and corresponding instructions were shown to guides, and we discussed how each guide would change the scenario to increase realism and the instructions to adhere to orientation and mobility principles. 
+        For instance, guides often would reflect on their own experience and mention how users can be hesitant in unfamiliar routes, taking smaller steps. Guides also mentioned how frequent but short instructions can help users stay on the path without getting overly distracted (e.g., “okay”, “a bit more”). 
+        Moreover, while previous literature reports sighted guides should not instruct in junctions, guides reported several exceptions where short instructions are still needed to maintain orientation. We design these into our simulation as well.
+        We find that off-the-shelf models struggle with our task, speaking repeatedly and at the wrong time while confusing directionality, distance, and relevant context. We now describe our automatic instruction generation procedure. 
+        One guide described the difficulty in aligning to cross in certain junctions (e.g., in areas that lack clear pavements and curbs), while reiterating a common occurrence of significant veering during the crossing. 
+        Thus, our instructions also incorporate short orientation feedback throughout the crossing in the case of slight deviation (above 30 degrees) from the planned path. 
+        As a rule of thumb, we emphasize concise instruction at the correct time, defined either based on distance from landmarks or at fixed intervals.
+        We leverage the rule-based generation to sample a random set of 1,000 clips, which are subsequently shown again to the sighted guides for quality validation and final refinements. Finally, the complete benchmark is generated. -->
+      </p>
+      <br>
+
+      <h3 id="sec1-2" class="title is-4">1.2 Adapting CARLA to Realistic Assistive Navigation Scenarios</h3>
+      <p>
+        We adapt CARLA to support rule-based instruction generation for assistive navigation, informed by real-world studies and feedback from O&M experts. 
+        Pedestrians are equipped with egocentric sensors and randomized goals across varied towns and weather. 
+        <!-- To simulate realistic behaviors, we modify default pedestrian paths—introducing veering and proximity to environmental elements—mirroring how blind users rely on tactile cues to navigate. -->
+        <!-- We adapt the CARLA simulator to support rule-based instruction generation for assistive navigation. 
+        The simulation is informed by real-world studies and feedback from orientation and mobility experts. 
+        Pedestrians are spawned with egocentric sensors and randomized goals across different town and weather conditions.
+        Since CARLA’s default pedestrian controller is limited (e.g., it sticks to the center of sidewalks and avoids nearby objects), we modify pedestrian paths to simulate realistic behaviors like veering and navigating close to environmental elements. 
+        This mirrors how blind individuals use tactile cues to explore their surroundings. -->
+      </p>
+      
+      <p>
+      <strong>Sampling Realistic Paths: </strong>
+        We increase path diversity by sampling waypoints near buildings and curbs and adding noise to simulate veering, as shown in <a href="#fig1">Figure 1</a>. 
+        Walkable regions are extracted using semantic maps, and route planning is handled with A* search. These paths generate video data at one frame per second, along with metadata such as obstacle type, location, and weather.
+      </p>
+      
+      <p>
+      <strong>Instruction Generation: </strong>
+        Instructions are generated using a Compound Action Specification (CAS) based on user orientation, route progress, and environment context. Each instruction includes: Action, Direction, and Angle.
+        We add context with nearby object or landmark descriptions (e.g., “building on the right”) using nine object types: building, fence, pedestrian, pole, vegetation, vehicle, wall, traffic sign. Relative directions are: in front, left, right, slightly left, slightly right, around.
+        Objects within 1.5m (cane range) trigger instructions like: ''Continue walking forward. Be careful, pole in front. Then turn slightly left. Vehicle on your right.''
+        A bird’s-eye view (from segmentation and depth maps) helps calculate distances. 
+      </p>
+      
+      <p>
+      <strong>Event-Driven Navigation Prompts: </strong>
+        While on sidewalks, instructions are triggered when a turn is required or an obstacle is detected within 1.5m. 
+        <!-- For example: ''Walk along the wall on your right.'' -->
+        At junctions, minimal instruction is used to avoid distraction. Example prompts include: ''You are approaching junction in five meters.'', ''You have exited the junction.''
+        We also log the reasoning behind issuing or withholding instructions, such as obstacle detection, path turning, or being inside a junction.
+      </p>
+      
+      <figure id="fig1" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/supp1.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 1: Extracting Layout Details for Modified Pedestrian Paths.</strong>  We extract walkable and
+          sidewalk space in the map, and employ it to sample waypoints nearby buildings and curbs. In
+          the figure, <span style="background-color: rgba(255, 0, 0, 0.5); color: black;"><em>red</em></span> denotes sidewalk space and white and <span style="background-color: rgba(0, 255, 0, 0.5); color: black;"><em>green</em></span> denotes road or obstructed space. The
+          sampled waypoints are then provided as intermediate goals to guide path planning for spawned
+          pedestrians during data collection. This ensures a realistic and challenging benchmark.
+        </figcaption>
+      </figure>
+      
+      <br>
+      <h3 id="sec1-3" class="title is-4">1.3 Real-World Video Annotation Process</h3>
+      <p>
+        Our in-situ dataset is a small, scenario-driven collection manually annotated by mobility guides. To improve generalizability, we expand our analysis using a larger dataset curated from publicly available outdoor walking videos, primarily filmed in U.S. locations and sourced from YouTube.
+        All original video links will be listed in our GitHub repository. We are committed to ethical data use and will promptly honor any takedown requests from original content creators.
+      </p>
+      
+      <p>
+        To validate our model’s real-world transferability, we curated an additional test set using publicly available YouTube videos, annotated by human annotators.
+        As shown in  <a href="#fig2">Figure 2</a>, we developed a custom annotation interface where annotators review videos alongside suggested instructions generated by GPT-4o. 
+        The interface displays four consecutive frames (1 FPS), with the current frame on the left and the next three seconds to the right. 
+        A text box shows the suggested instruction from GPT-4o, which annotators can edit for accuracy. The interface includes frame navigation buttons, keyboard shortcuts, an option to display 4 or 8 frames, and a GIF mode for dynamic visualization.
+        In total, we collected 10,000 annotated video clips for evaluation.
+      </p>
+      <!-- <p>
+        Annotators are instructed to label navigation prompts with precise timing. 
+        To ensure annotation quality: All videos are annotated in-house by trained annotators. 
+        Each batch (20 clips) is reviewed with feedback before annotating the full set. Each clip is annotated twice by two annotators independently. A validator resolves conflicts—minor differences are accepted; major ones are reviewed by mobility guides for final judgment.
+        In total, we collected 10,000 annotated video clips for evaluation.
+      </p> -->
+      
+      <figure id="fig2" class="image" style="max-width:1200px; margin:0 auto; text-align:center;">
+        <img src="./resources/supp3_annotation_interface.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 2: Annotation Interface for YouTube Videos</strong> We collect a diverse set of U.S.-based YouTube 
+          videos and manually annotate them through the interface in a multi-round validation process.
+        </figcaption>
+      </figure>
+
+      <br><br>
+
+      
+      <h2 id="sec2" class="title is-2">2 Experimental Settings</h2>
+      <h3 id="sec2-1" class="title is-4">2.1 Prompt and Input Settings</h3>
+      
+
+      <p>
+      <h4 class="title is-5">In-Context Learning Prompt for Off-The-Shelf Models:</h4>
+        We find that prompt design plays a crucial role in enabling models to understand the information needs of blind end-users.
+        In our baseline prompt for off-the-shelf model analysis, we provide goal coordinates (a 2D vector representing a relative target, see Section 3.1 of the main paper), along with instruction prompts guiding the LLM to generate navigation directions, as illustrated below.
+      </p>
+      <div class="box" style="width: 80%; margin: 0 auto;">
+        <pre><code>
+          You are guiding a blind person. The blind person needs to approach the goal
+          [x,y]={goal coordinate} located in relative longitudinal and latitudinal offsets in meters.
+          Generate an instruction for the current frame. You will need to provide step-by-step verbal 
+          navigation instructions to help them reach the destination safely and efficiently. 
+          Instruct the user to stay on the path to the goal, only notify what is
+          needed, including immediate turns they need to make and obstacles to avoid
+          within 1.5m (cane distance). Keep the instructions in junctions minimal for
+          safety to avoid distraction as the user relies on hearing to navigate and listen
+          to traffic. You should generally not instruct the user for consecutive frames
+          unless absolutely needed, and avoid too frequent instructions. Only return the
+          instruction to convey. Return “None” for remaining silent.
+          
+          Examples:
+          Input: goal: [x,y]=[0,1], Output: Keep walking straight.
+          Input: goal: [x,y]=[0,1], Output: None.
+          Input: goal: [x,y]=[1,0], Output: Turn right and keep crossing.
+          Input: goal: [x,y]=[0.5,0], Output: Turn slightly right and keep walking. There’s a pole on your left.
+          Input: goal: [x,y]=[-1,0], Output: Turn to your nine and keep walking. There’s a pole on your right and vehicle on your left.
+          Input: goal: [x,y]=[-0.5,0], Output: Turn slightly left and continue walking. There’s a vehicle on your left.
+          Input: goal: [x,y]=[0,-1], Output: Turn around. There’s a fence on your left.
+        </code></pre>
+      </div>
+
+      <br>
+      <p>
+        <h4 class="title is-5">Basic Prompt for Fine-tuning:</h4>To analyze the role of inputs to the model, we first fine-tune models with the basic prompt below, which contains the goal coordinate and instructions to guide users.
+      </p>
+      <div class="box" style="width: 80%; margin: 0 auto;">
+        <pre><code>
+          You are guiding a blind person. The blind person needs to approach the goal
+          [x,y]={goal coordinate} located in relative longitudinal and latitudinal offsets in
+          meters. Generate an instruction for the current frame. You will need to provide
+          step-by- step verbal navigation instructions to help them reach the destination
+          safely and efficiently. Instruct instruct the user to stay on the path to the goal,
+          only notify what is needed, including immediate turns they need to make and
+          obstacles to avoid within 1.5m (cane distance). Keep the instructions in junctions
+          minimal for safety to avoid distraction as the user relies on hearing to navigate
+          and listen to traffic. You should generally not instruct the user for consecutive
+          frames unless absolutely needed, and avoid too frequent instructions. Only
+          return the instruction to convey. Return “None” for remaining silent.
+        </code></pre>
+      </div>
+
+      <br>
+      <p>
+      <h4 class="title is-5">Prompt with History, Plan, and Reason Prediction for Finetuning:</h4> 
+        The models denoted by
+        ‘+’ are trained with the below prompt, which contains history, plan, information and prompting
+        instruction to predict reasons for the navigation instruction:
+      </p>
+      <div class="box" style="width: 80%; margin: 0 auto;">
+        <pre><code>
+          You are guiding a blind person. The blind person needs to approach the goal
+          [x,y]={goal coordinate} located in relative longitudinal and latitudinal offsets
+          in meters. The high-level plan: {plan}, needs to be followed safely. You have
+          conveyed the following instructions in the past: {history information}. Generate
+          an instruction for the current frame. You will need to provide step-by- step
+          verbal navigation instructions to help them reach the destination safely and
+          efficiently. Instruct instruct the user to stay on the path to the goal, only notify
+          what is needed, including immediate turns they need to make and obstacles to
+          avoid within 1.5m (cane distance). Keep the instructions in junctions minimal
+          for safety to avoid distraction as the user relies on hearing to navigate and listen
+          to traffic. You should generally not instruct the user for consecutive frames
+          unless absolutely needed, and avoid too frequent instructions. Only return the
+          instruction to convey. Return “None” for remaining silent.
+          Answer in JSON format. There should be a key “reason” and a key “instruction”
+          in the JSON.
+          { “reason”: “One of the following: ‘remain_silent’, ‘remain_silent_in_junction’,
+          ‘enter_junction’, ‘exit_junction’, ‘obstacle_in_front’, ‘constant_instruction’, 
+          ‘direction_change’, ’stop”’, “instruction”: “The spoken instruction provided to
+          the blind navigator corresponding to the specified reason”}
+        </code></pre>
+      </div>
+  
+      <!-- <br>
+      <h3 id="sec2-2" class="title is-4">2.2 Metric Definitions</h3>
+      <p>
+        We leverage standard open and closed-loop instruction generation metrics throughout our analysis, including success rate (%), route completion (%), navigation score (%), navigation error (m), collision rates.
+        To directly quantify the models’ timing capabilities, we introduce timing-based metrics, specifically, classification F1 score and AUC.
+        <br>
+        In addition, to measure task-specific metrics that capture cognitive load, safety risk, or user trustworthiness, we further report <strong>Safety-Critical Timing (SCT)</strong>, <strong>Informativeness Score (IS)</strong>, and a holistic <strong>Assistance Score (AS)</strong>.
+        Specifically, SCT focuses on key events such as collisions and junction transitions, which is defined as: <code>SCT = N_correct-safety / N_total-safety</code>, where <code>N_correct-safety</code> is the number of safety-critical events with correctly timed instructions, and <code>N_total-safety</code> is the total number of such events.
+        IS measures semantic conciseness and safety. For each instruction, we compute the ratio of the number of crucial event-related keywords it contains to the total number of words output by the model for that instruction.
+        AS is computed as the geometric mean of success rate (SR), route completion (RC), and task-oriented penalties (SCT, Informativeness), which combines the multifaceted aspects of assistive navigation into a unified metric.
+          
+        Our rule-based instruction timing is consistent and event-driven, enabling models to learn accurate timing behaviors. 
+        We evaluate this using a strict metric that checks whether model instructions occur within 1 second of ground truth cues, reporting F1 and AUC scores.
+        To reflect the safety-critical nature of some cues—e.g., late turn instructions risking collisions—multiple instructions within the window are counted as false positives.
+        We further report <strong>Safety-Critical Timing (SCT)</strong>, which focuses on key events like collisions and junction transitions. 
+        For each, if the closest non-silent instruction before or after the event correctly references it, it is considered correct. 
+        SCT is defined as: <code>SCT = N_correct-safety / N_total-safety</code>, where <code>N_correct-safety</code> is the number of safety-critical events with correctly timed instructions, and <code>N_total-safety</code> is the total number of such events.
+        In addition, we introducea holistic assistance score (AS), which combines the multifaceted aspects of assistive navigation into a unified metric. AS is computed as the geometric mean of success rate (SR), route completion (RC), and task-oriented penalties (SCT, Informativeness):
+      </p>
+
+      <br> -->
+      <h3 id="sec2-2" class="title is-4">2.2 Closed-Loop Evaluation with Noisy Conditions</h3>
+      <p>
+        We evaluate model performance in a closed-loop manner by conducting interactive experiments and evaluations in a blind simulation environment.
+        In this simulation, an ego-centered walker executes instructions predicted by the model and follows the goal. To simulate realistic sensor measurements and account for real-world uncertainty, 
+        we further add Gaussian noise to both the goal coordinates (Gaussian noise with mean = 0°, SD = 2.0m) and the pedestrian’s orientation (Gaussian noise with mean = 0°, SD = 5°).
+      </p>
+
+      <br><br>
+      <h2 id="sec3" class="title is-2">3 Additional Experimental Analysis</h2>
+      <h3 id="sec3-1" class="title is-4">3.1 Results Summary</h3>
+      <p>
+        <strong>Open-Loop Evaluation Summary:</strong> <a href="#fig3">Figure 3</a> summarizes the performance of fine-tuned models on TIMELI in an open-loop simulation setting. 
+        The results highlight key challenges in interactive decision-making: models frequently exhibit poor timing, confuse directional instructions (e.g., "left" vs. "right"), and tend to generate overly verbose responses.
+      </p>
+
+      <!-- <p>
+        <a href="#fig3">Figure 3</a>. summarizes the performance of fine-tuned models on
+        TIMELI, evaluated in the open-loop simulation setting. The plot highlights the challenges of the
+        interactive decision-making task: current models often exhibit inappropriate timing, frequently
+        confuse instruction directions (e.g., “left” vs. “right”), and generate overly verbose responses.
+      </p> -->
+        <figure id="fig3" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp4_piechart.png" 
+               style="width:80%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+            <strong>Figure 3: Radar Plot for Fine-tuned Models in Simulation.</strong> We leverage the proposed video-based
+            assistive navigation task to evaluate multiple dimensions of instruction generation models. 
+            By finetuning models on our TIMELI benchmark, we observe that existing models frequently make errors in
+            our navigation task, including timing of instructions (Timing), clarity and brevity of communication
+            (Conciseness), identification of the reason (Instruction Reason), appropriate silence in intersections
+            (Silence in Junction), accuracy in detecting relevant obstacles (Object Precision), and correctness of
+            direction (Instruction Direction).
+          </figcaption>
+        </figure>
+
+      <br>
+      <h3 id="sec3-2" class="title is-4">3.2 Model Components Ablation</h3>
+      <p>
+        To evaluate the impact of different components in our model, including input instruction history, high-level navigation plans, 
+        and reason prediction, we incrementally add each component into the model and evaluate its performance in both open-loop and closed-loop settings. 
+        <a href="#tab1">Table 1</a> and <a href="#tab2">Table 2</a> indicate that the incremental addition of each component consistently enhances the model’s performance across both open-loop and closed-loop evaluations. 
+        In particular, adding direct supervision for reason prediction shows a substantial improvement, which helps the model better understand and articulate the rationale behind navigation instructions.
+      </p>
+      <br>
+      
+
+      <figure id="tab1" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp_openloop_component.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+            <strong>Table 1: Impact of Model Components in Open-Loop Setting.</strong> To analyze the impact of different components added to TIMELI models, 
+            we report the performance of each models by incrementally adding inputs (history and high-level plan) as well as output reason prediction. 
+            Notably, the direct reason prediction supervision leads to consistent improvements across all metrics.
+          </figcaption>
+        </figure>
+      <br>
+      <figure id="tab2" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp_closeloop_component.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+            <strong>Table 2: Impact of Model Components in Closed-Loop Setting.</strong> To evaluate the impact of each component added to the TIMELI models,
+            we report performance in the closed-loop setting by incrementally incorporating inputs (history, plan) and output reason prediction. 
+            Following the open-loop evaluation, the reason prediction module leads to consistent improvements across all metrics.
+          </figcaption>
+        </figure>
+        
+
+      <br>
+      <h3 id="sec3-3" class="title is-4">3.3 Inference Time</h3>
+      <p>
+        We evaluate the trade-off between inference time and model performance with and without the early exit mechanism. 
+        The large LLaVA-v1.6 model has a runtime of 1.22 seconds per frame, while the tiny model runs at 0.77 seconds per frame. 
+        With early exit enabled, we observe a significant reduction in inference time with minimal impact on performance, e.g., 
+        the large model’s runtime decreases to 0.99 seconds per frame, achieving an 18.85% speedup, 
+        while key metrics such as route completion score in closed-loop evaluation remain unaffected.
+      </p>
+
+<!--       <h3 id="sec3-5" class="title is-4">3.5 Model Generalization to BDD</h3>
+      <p>...</p> -->
+
+      <br>
+      <h3 id="sec3-4" class="title is-4">3.4 Preliminary Smartphone-based Evaluation</h3>
+      <p>
+        Although the task remains challenging, we conducted a preliminary supervised user study with ten blind participants using a smartphone-based application to assess system performance and collect feedback. 
+        <strong>Figure 4</strong> shows the interface used in real-world closed-loop experiments, developed on iOS and integrated with the Google Maps API for route planning. Based on GPS data, 
+        the system computes local goal positions and issues corresponding commands. A front-facing camera captures 60 FPS video, which, combined with positional data, is processed by a lightweight MLLM to generate navigation instructions.
+        Non-silent outputs are delivered via a text-to-speech engine. We tested three real-world routes: two 50-meter paths with one turn, and a 100-meter route with two turns and an intersection. 
+        As shown in <a href="#tab4">Table 4</a>, the overall success rate was 40%, with most failures caused by static obstacles. Interestingly, dynamic obstacles (e.g., pedestrians, vehicles) often adjusted their paths, 
+        reducing collision risk. While the system is not yet ready for unsupervised daily use, these early results demonstrate the potential of our MLLM-based navigation framework to support blind users and guide future improvements.
+
+        <!-- Although the task remains challenging, we conducted a preliminary supervised user study with ten blind participants using a smartphone-based application to evaluate system performance and gather feedback. 
+        <a href="#fig4">Figure 4</a> shows the system interface used during real-world closed-loop experiments. The system was developed on an iOS device and utilizes the Google Maps API for route planning to predefined destinations. 
+        Based on GPS coordinates from the API, it computes local goal positions and corresponding commands. A front-view camera captures images at 60 frames per second, which, along with the calculated data, 
+        is passed to a lightweight MLLM that generates navigation instructions. If an instruction other than “None” (indicating silence) is produced, it is read aloud using a text-to-speech engine.
+        We designed three real-world navigation routes using Google Maps: two 50-meter routes with a single turn, and one 100-meter route with two turns and an intersection. 
+        As shown in Table 10, the overall success rate was 40%, with most failures due to collisions with static obstacles. Interestingly, dynamic obstacles such as pedestrians and vehicles often adjusted their paths, 
+        reducing collision risk, whereas static obstacles presented a greater hazard. Although the current system is not yet suitable for unsupervised daily use, 
+        these initial results highlight the potential of our MLLM-based navigation framework to assist individuals with visual impairments and guide future development. -->
+      </p>
+      <figure id="fig4" class="image" style="max-width:500px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp5_smartphone.png" 
+               style="width:80%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+            <strong>Figure 4: iPhone App Interface</strong> We validate our model in closed-loop, real-world settings using an
+            iPhone app instantiation. The app displays the front-view image on the left and the planned path to
+            the destination (via Google Maps) on the right. Instructions are shown at the top and also delivered
+            through audio.
+          </figcaption>
+        </figure>
+
+        <br>
+        <figure id="tab4" class="image" style="max-width:600px; margin:0 auto; text-align:center;">
+          <img src="./resources/table_smartphone.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+            <strong>Table 4: Smartphone-Based, Closed-Loop Real-World Study.</strong>   We conduct a real-world study
+            using a smartphone-based system with ten participants. Each participant was instructed to walk along
+            a predefined route while strictly following the system’s spoken navigation instructions.
+          </figcaption>
+        </figure>
+        
+      <br><br>
+      <h2 id="sec4" class="title is-2">4 Additional Qualitative Results</h2>
+      <br>
+        
+      <p>
+        <strong>Open-loop Examples:</strong> The figures below illustrate model differences in open-loop navigation scenarios. 
+        <!-- In <a href="#fig6">Figure 6</a> and <a href="#fig7">Figure 7</a>, we show qualitative comparisons between LLaVA-v1.6 (trained on our benchmark) and GPT-4o.  -->
+        In <a href="#fig5">Figure 5</a>, <a href="#fig6">6</a>, and <a href="#fig7">7</a>, we show qualitative comparisons between LLaVA-v1.6 (trained on our benchmark) and GPT-4o. 
+        <!-- We show that . -->
+        LLaVA-v1.6 exhibits better situational awareness, while GPT-4o lacks temporal, spatial, and safety-critical awareness in the open-loop setting and tends to generate overly redundant and frequent instructions. 
+        <!-- In <a href="#fig7">Figure 7</a>, we show qualitative comparisons between LLaVA-v1.6 (trained on our benchmark) and GPT-4o. 
+        LLaVA-v1.6 exhibits better situational awareness, while GPT-4o tends to generate overly verbose and frequent instructions.  -->
+        <!-- <a href="#fig8">Figure 8</a>, <a href="#fig9">Figure 9</a> and <a href="#fig10">Figure 10</a> highlight successful predictions on real-world video data from both models.  -->
+        <!-- However, as shown in <a href="#fig11">Figure 11</a>, LLaVA-v1.6+ still fails to guide the pedestrian correctly in some cases， failures also captured by our Safety-Critical Timing (SCT) metric. -->
+      </p>
+
+      <!-- <figure id="fig6" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/result1.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 6: Success Case in Simulation for LLaVA-v1.6+:</strong> 
+            The LLaVA model successfully alerts the pedestrian upon entering a junction, remains silent while crossing, and then instructs them to turn right to avoid a nearby motorcycle.
+            In contrast, GPT-4o incorrectly states that the pedestrian is <em>approaching</em> the junction, even though they are already at it, and fails to provide further instructions in the final frame.
+        </figcaption>
+      </figure> -->
+
+        <br>
+
+      <figure id="fig5" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/new_example_sim1.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 5: Example in open-loop setting:</strong> 
+            At time <strong>t</strong>, GPT-4o instructs the user to <em>incorrectly</em> turn slightly right, and fails to recognize that the user is entering a junction.
+            At time <strong>t+1</strong>, GPT-4o continues to issue redundant instructions before the previous instruction has finished, showing a lack of temporal awareness. 
+            At time <strong>t+2</strong>, GPT-4o incorrectly indicates that the sidewalk ahead is clear, even though there is a pole (possibly misidentified as a tree) on the left.
+            <!-- Although GPT-4o can generate instructions that appear reasonable, it lacks <em>temporal, spatial, and safety-critical</em> awareness in the open-loop setting. -->
+            <!-- At time <strong>t</strong>, even though the path ahead is clear and the pole was at a safe distance, GPT-4o generated an unnecessary instruction, asking the user to turn left.
+            At time <strong>t+1</strong>, GPT-4o issues another instruction before the previous one had finished, showing a lack of temporal awareness. Moreover, the model fails to recognize the presence of a junction, which is critical for blind users.
+            At time <strong>t+2</strong>, GPT-4o generate another instruction, asking the user to avoid a trash bin that was far away, indicating poor distance awareness of obstacles and resulting in redundant or unnecessary guidance. -->
+          
+            <!-- The LLaVA model alerts pedestrians that they are approaching a junction and warns them of an obstacle, offering timely and context-aware guidance.
+            While GPT-4o provides correct instructions, it issues them in every frame, leading to overly frequent and potentially distracting feedback. -->
+        </figcaption>
+      </figure>
+
+       <br>
+
+      <figure id="fig6" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/new_example_sim2.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 6: Example in open-loop setting:</strong> 
+            <!-- Although GPT-4o can generate instructions that appear reasonable, it lacks <em>temporal, spatial, and safety-critical</em> awareness in the open-loop setting. -->
+            At time <strong>t</strong>, GPT-4o fails to generate navigation instructions, instead, it requests additional input from the user.
+            At time <strong>t+1</strong>, GPT-4o continues to issue redundant instructions before the previous one has finished and unnecessarily describes a distant motorcycle.
+            At time <strong>t+2</strong>, GPT-4o fails to recognize the next local goal, incorrectly instructing the user to keep walking, while also providing irrelevant descriptions of a distant museum.
+          
+            <!-- The LLaVA model alerts pedestrians that they are approaching a junction and warns them of an obstacle, offering timely and context-aware guidance.
+            While GPT-4o provides correct instructions, it issues them in every frame, leading to overly frequent and potentially distracting feedback. -->
+        </figcaption>
+      </figure>
+
+       <br>
+
+      <figure id="fig7" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/new_example_sim3.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 7: Example in open-loop setting:</strong> 
+            <!-- Although GPT-4o can generate instructions that appear reasonable, it lacks <em>temporal, spatial, and safety-critical</em> awareness in the open-loop setting. -->
+            At time <strong>t</strong>, GPT-4o incorrectly instructs the user to wait for distant cars, rather than directing them to proceed forward.
+            At time <strong>t+1</strong>, GPT-4o fails to recognize the next local goal and provides irrelevant descriptions.
+            At time <strong>t+2</strong>, GPT-4o continues to issue redundant instructions before the previous one has finished, which may overwhelm the user.
+          
+            <!-- The LLaVA model alerts pedestrians that they are approaching a junction and warns them of an obstacle, offering timely and context-aware guidance.
+            While GPT-4o provides correct instructions, it issues them in every frame, leading to overly frequent and potentially distracting feedback. -->
+        </figcaption>
+      </figure>
+
+       <br>
+      
+      <p>
+        <strong>Real-World Open-loop Examples:</strong> The figures below illustrate model differences in real-world open-loop navigation scenarios. 
+        Similar to open-loop settings, our qualitative examples (<a href="#fig8">Figure 8</a>, <a href="#fig9">9</a>, and <a href="#fig10">10</a>) show that GPT-4o lacks <em>temporal, spatial, and safety-critical</em> awareness, while
+        LLaVA-v1.6 exhibits better situational awareness. 
+      </p>
+      
+       <br>
+      
+
+      <figure id="fig8" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/new_example_real1.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 8: Example in real-world open-loop setting:</strong> 
+           At time <strong>t</strong> and <strong>t+1</strong>, GPT-4o fails to generate navigation instructions and instead requests additional input from the user.
+           At time <strong>t+2</strong>, GPT-4o incorrectly states that the path is clear, despite the presence of multiple pedestrians ahead.
+          <!-- At time <strong>t</strong>, GPT-4o incorrectly instructs the user to turn slightly left, which would direct the user toward an obstacle. Additionally, it fails to recognize the junction ahead.
+          At time <strong>t+1</strong>, GPT-4o issues another instruction before the previous one had completed, asking the user to avoid an obstacle that has already been passed, indicating temporal lag.
+          At time <strong>t+2</strong>, GPT-4o generate another instruction containing overly redundant descriptions of the right-side obstacles (i.e., the leaning yellow sign and wall) while overlooking an obstacle on the left, demonstrating that GPT-4o lacks awareness of safety-critical objects and fails to balance informativeness with cognitive load, potentially overwhelming the user.  -->
+          <!-- and the model generate overly redunt descriptions of the right obstacle (i.e., leaning yellow sign and wall), and overlook the obstacle on the left side. This indicates GPT-4o lacks awareness of what is safety criticle object, and how to keep instructions more informative to avoid overwhelm the user. -->
+
+
+          
+            <!-- The LLaVA model alerts pedestrians that they are approaching a junction and warns them of an obstacle, offering timely and context-aware guidance.
+            While GPT-4o provides correct instructions, it issues them in every frame, leading to overly frequent and potentially distracting feedback. -->
+        </figcaption>
+      </figure>
+
+        <br>
+
+      <figure id="fig9" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/new_example_real2.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 9: Example in real-world open-loop setting:</strong> 
+
+          At time <strong>t</strong>, GPT-4o incorrectly instructs the user to turn slightly left, which would direct them toward an obstacle. It also fails to recognize the junction ahead.
+          At time <strong>t+1</strong>, GPT-4o issues another instruction before the previous one has completed, asking the user to avoid an obstacle that has already been passed.
+          At time <strong>t+2</strong>, GPT-4o generates another instruction containing overly redundant descriptions of right-side obstacles (e.g., “leaning,” “yellow sign,” and “wall”), while overlooking an obstacle on the left.
+          
+          <!-- At time <strong>t</strong>, GPT-4o incorrectly instructs the user to turn slightly left, which would direct the user toward an obstacle. Additionally, it fails to recognize the junction ahead.
+          At time <strong>t+1</strong>, GPT-4o issues another instruction before the previous one had completed, asking the user to avoid an obstacle that has already been passed, indicating temporal lag.
+          At time <strong>t+2</strong>, GPT-4o generate another instruction containing overly redundant descriptions of the right-side obstacles (i.e., the leaning yellow sign and wall) while overlooking an obstacle on the left, demonstrating that GPT-4o lacks awareness of safety-critical objects and fails to balance informativeness with cognitive load, potentially overwhelming the user.  -->
+          <!-- and the model generate overly redunt descriptions of the right obstacle (i.e., leaning yellow sign and wall), and overlook the obstacle on the left side. This indicates GPT-4o lacks awareness of what is safety criticle object, and how to keep instructions more informative to avoid overwhelm the user. -->
+
+
+          
+            <!-- The LLaVA model alerts pedestrians that they are approaching a junction and warns them of an obstacle, offering timely and context-aware guidance.
+            While GPT-4o provides correct instructions, it issues them in every frame, leading to overly frequent and potentially distracting feedback. -->
+        </figcaption>
+      </figure>
+
+        <br>
+
+      <figure id="fig10" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/new_example_real3.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 10: Example in open-loop setting:</strong> 
+          At time <strong>t</strong>, GPT-4o incorrectly states that the path is clear, even though there are people running on the left.
+          At time <strong>t+1</strong>, GPT-4o issues another instruction before the previous one has completed, using unnecessarily long sentences that could overwhelm the user.
+          At time <strong>t+2</strong>, GPT-4o incorrectly classifies a moving vehicle as 'parked' and includes redundant descriptions of a pedestrian far away.
+          <!-- and the model generate overly redunt descriptions of the right obstacle (i.e., leaning yellow sign and wall), and overlook the obstacle on the left side. This indicates GPT-4o lacks awareness of what is safety criticle object, and how to keep instructions more informative to avoid overwhelm the user. -->
+
+
+          
+            <!-- The LLaVA model alerts pedestrians that they are approaching a junction and warns them of an obstacle, offering timely and context-aware guidance.
+            While GPT-4o provides correct instructions, it issues them in every frame, leading to overly frequent and potentially distracting feedback. -->
+        </figcaption>
+      </figure>
+
+        <br>
+
+      <p>
+        <strong>Closed-loop Route Visualization:</strong> The results of our closed-loop experiments are shown in <a href="#fig11">Figure 11</a>. While failures do occur, such as users veering off the intended path, the models often succeed in guiding users back on track. 
+        This recovery ability is likely attributed to the diversity in the training data, which includes variations in perspective and pedestrian path scenarios.
+      </p>
+
+      <figure id="fig11" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp6_closedloop_vis.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+            <strong>Figure 11: Open-loop Visualization.</strong> We present success and failure cases from the closed-loop
+            navigation evaluation. The blue line shows the intended route, and the orange line shows the path a
+            follower walks based on the instructions of a TIMELI-trained model. For failure cases, the model
+            demonstrates an ability to recover from deviations by issuing corrective instructions. However, the
+            recovery process often incurs additional time, which can lead to failure to reach the destination within
+            the allotted time budget.
+          </figcaption>
+        </figure>
+      <br>
+
+      <!-- <figure id="fig8" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/result3.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 8: Success Case in Real-World for LLaVA-v1.6:</strong> 
+            In this real-world scenario, LLaVA effectively communicates information about the surroundings—including vegetation, fences, buildings, and pedestrians—while guiding navigation. 
+            Although GPT-4o provides appropriate instructions as well, its verbose and continuous output in every frame results in distracting guidance.
+        </figcaption>
+      </figure>
+
+        <br>
+
+      <figure id="fig9" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/result4.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 9: Success Case in Real-World for LLaVA-v1.6:</strong> 
+            In this scenario, LLaVA effectively instructs the pedestrian to stop before a junction as a car approaches, directs them to cross once it is safe, 
+            and then alerts them to potential danger after crossing. While GPT-4o also provides appropriate instructions, its guidance is more verbose than LLaVA’s.
+        </figcaption>
+      </figure>
+
+        <br>
+
+      <figure id="fig10" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/result5.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 10: Success Case in Real-World for LLaVA-v1.6:</strong>
+            In this scenario, LLaVA effectively instructs the pedestrian to stop before a junction as a car approaches, directs them to cross once the car has passed, and then alerts them to potential danger after crossing. 
+            Although GPT-4o also provides appropriate instructions, its guidance is more verbose than LLaVA’s.
+        </figcaption>
+      </figure>
+
+        <br>
+
+      <figure id="fig11" class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+        <img src="./resources/result6.png" 
+             style="width:100%; height:auto; display:block; margin:0 auto;" 
+             alt="Pedestrian Paths"> 
+        <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555; text-align:left;">
+          <strong>Figure 11: Failure Case in Real-World for LLaVA-v1.6 and GPT-4o:</strong> 
+            In this scenario, LLaVA correctly notifies the pedestrian about entering a junction but mistakenly directs them to move forward despite an approaching car. 
+            GPT-4o successfully instructs the pedestrian to stop but then inconsistently tells them to proceed in the intermediate frame.
+        </figcaption>
+      </figure>
+
+        <br> -->
+
+
+      
+
+<!--       <figure class="image" style="max-width:800px; margin:0 auto; text-align:center;">
+          <img src="./resources/supp2_statistics.png" 
+               style="width:100%; height:auto; display:block; margin:0 auto;" 
+               alt="Pedestrian Paths"> 
+          <figcaption style="margin-top:0.5rem; font-size:1rem; color:#555;">
+            <strong>Figure 2: Benchmark Statistics</strong> Left: distribution of events, categorized by whether the user is at
+            an intersection. Right: keywords from instructional tasks, derived through in-situ study and trained
+            mobility guides interviews.
+          </figcaption>
+        </figure> -->
+
+    </div>
+  </section>
+
+  <!-- Acknowledgments -->
+<!--   <section class="section">
+    <div class="container has-text-centered">
+      <h2 class="title is-3">Acknowledgments</h2>
+      <div class="content has-text-justified">
+        <p>{{ACKNOWLEDGMENTS_PLACEHOLDER}}</p>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- BibTeX -->
+<!--   <section class="section">
+    <div class="container has-text-centered">
+      <h2 class="title is-3">BibTeX</h2>
+      <pre><code>
+@inproceedings{placeholder202X,
+  title={{TITLE}},
+  author={{AUTHORS_PLACEHOLDER}},
+  booktitle={{CONFERENCE_PLACEHOLDER}},
+  year={{YEAR_PLACEHOLDER}}
+}
+      </code></pre>
+    </div>
+  </section> -->
+
+<!--   <footer class="footer">
+    <div class="container has-text-centered">
+      <p>Template version — replace all <code>{{...}}</code> placeholders with your content.</p>
+    </div>
+  </footer> -->
+
+  <!-- Local scripts -->
+  <script src="./static/js/index.js"></script>
+</body>
+</html>
+
